@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Moba.Gateway/Moba.Gateway.csproj" />
+    <Project Path="src/Moba.Matchmaker/Moba.Matchmaker.csproj" />
+    <Project Path="src/Moba.Orchestrator/Moba.Orchestrator.csproj" />
+    <Project Path="src/Moba.Shared/Moba.Shared.csproj" />
+    <Project Path="src/Moba.UdpServer/Moba.UdpServer.csproj" />
+  </Folder>
+  <Folder Name="/src/Moba.MasterServer/">
+    <Project Path="src/Moba.MasterServer/MobaServer.csproj" />
+  </Folder>
+</Solution>
