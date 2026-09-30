@@ -6,6 +6,11 @@
     <Project Path="src/Moba.Shared/Moba.Shared.csproj" />
     <Project Path="src/Moba.UdpServer/Moba.UdpServer.csproj" />
   </Folder>
+  <Folder Name="/src/Moba.Client/">
+    <Project Path="src/Moba.Client/MobaClient.csproj">
+      <BuildType Project="Debug" />
+    </Project>
+  </Folder>
   <Folder Name="/src/Moba.MasterServer/">
     <Project Path="src/Moba.MasterServer/MobaServer.csproj" />
   </Folder>
