@@ -4,6 +4,7 @@ using Services.TokenJWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using NATS.Client.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 
 builder.Services.AddControllers();
+builder.Services.AddNats();
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 
