@@ -21,11 +21,15 @@ public class MatchmakingManager
     public void AddPlayer(PoolPlayer player, MatchProperty mode)
     {
         GetPool(mode).AddPlayer(player);
+        Console.WriteLine($"[MatchmakerManager] Added new playerId:{player.PlayerId} to pool:{mode.ToString()}");
+        Console.WriteLine($"[MatchmakerManager] Total players in this pool:{GetPool(mode).GetActivePlayers().Count}");
     }
 
     public void RemovePlayer(long playerId, MatchProperty mode)
     {
         GetPool(mode).RemovePlayer(playerId);
+        Console.WriteLine($"[MatchmakerManager] Removed new playerId:{playerId} from pool:{mode.ToString()}");
+        Console.WriteLine($"[MatchmakerManager] Total players in this pool:{GetPool(mode).GetActivePlayers().Count}");
     }
 
 }

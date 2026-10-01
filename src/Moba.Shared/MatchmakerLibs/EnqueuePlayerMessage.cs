@@ -1,5 +1,5 @@
 using Moba.Shared.MatchmakerLibs;
 
-namespace DTOs;
+namespace Moba.Shared.MatchmakerLibs;
 
 public readonly record struct EnqueuePlayerMessage(long PlayerId, int MMR, MatchProperty Mode);

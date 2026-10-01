@@ -5,6 +5,7 @@ using DTOs.MatchmakeCSSC;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Moba.Shared.MatchmakerLibs;
 using NATS.Client.Core;
 using NATS.Client.Serializers.Json;
 
