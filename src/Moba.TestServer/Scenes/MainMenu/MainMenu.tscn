@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://oyideadbh36b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83fg3"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.2810804, 0.048797384, 0.043072954, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ichqs"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.5154536, 0.11781099, 0.1111171, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcdtc"]
+bg_color = Color(0.45711088, 0.45711094, 0.45711076, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nl4gn"]
+bg_color = Color(0.41598046, 0.41598043, 0.4159804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cdkru"]
+bg_color = Color(0.5198213, 0.5198213, 0.5198212, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7oo3"]
+bg_color = Color(0.45711088, 0.45711094, 0.45711076, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sg7ab"]
+bg_color = Color(0.41598046, 0.41598043, 0.4159804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpx3y"]
+bg_color = Color(0.5198213, 0.5198213, 0.5198212, 1)
+
+[node name="Control" type="Control" unique_id=1861006175]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1484054045]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_83fg3")
+
+[node name="LobbyMenu" type="PanelContainer" parent="PanelContainer" unique_id=1211135292]
+custom_minimum_size = Vector2(450, 300)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ichqs")
+
+[node name="Content" type="VBoxContainer" parent="PanelContainer/LobbyMenu" unique_id=496431377]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Header" type="HBoxContainer" parent="PanelContainer/LobbyMenu/Content" unique_id=58314118]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Title" type="Label" parent="PanelContainer/LobbyMenu/Content/Header" unique_id=1101294657]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.69693524, 0.6990257, 0.6339283, 1)
+theme_override_font_sizes/font_size = 23
+text = "SELECT GAME MODE"
+
+[node name="Modes" type="HBoxContainer" parent="PanelContainer/LobbyMenu/Content" unique_id=1472977072]
+layout_mode = 2
+
+[node name="Solo" type="Button" parent="PanelContainer/LobbyMenu/Content/Modes" unique_id=1123616271]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.7186715, 0.9333708, 0.9882814, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_vcdtc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nl4gn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cdkru")
+text = "1 v 1"
+
+[node name="Trio" type="Button" parent="PanelContainer/LobbyMenu/Content/Modes" unique_id=1108801711]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.7186715, 0.9333708, 0.9882814, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_vcdtc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nl4gn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cdkru")
+text = "3 v 3"
+
+[node name="Trio2" type="Button" parent="PanelContainer/LobbyMenu/Content/Modes" unique_id=608813247]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.7186715, 0.9333708, 0.9882814, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_vcdtc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nl4gn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cdkru")
+text = "5 v 5"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/LobbyMenu/Content" unique_id=605543337]
+layout_mode = 2
+
+[node name="Trio" type="Button" parent="PanelContainer/LobbyMenu/Content" unique_id=742395057]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_c7oo3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sg7ab")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kpx3y")
+text = "Find lobby"

@@ -1,5 +1,5 @@
 using Data;
-using DTOs.Auth;
+using Moba.Shared.MasterServerDto;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -69,7 +69,7 @@ public class AuthController : ControllerBase
 
         string token = _tokenService.CreateToken(existingUser.Id, existingUser.Username);
 
-        return Ok(new { token });
+        return Ok(token);
         
 
     }
