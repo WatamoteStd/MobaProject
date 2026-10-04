@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bv81p57wetfsa"]
+
+[ext_resource type="Texture2D" uid="uid://bpvo26yo1c5jg" path="res://Assets/Map/Textures/Tile/ground_to_grass.png" id="1_4p63e"]
+[ext_resource type="Texture2D" uid="uid://dnd5gqx700ljv" path="res://Assets/Map/Textures/Tile/ground_to_grass_normal.png" id="2_v1kmm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ichqs"]
+albedo_color = Color(0.5198213, 0.5198213, 0.5198212, 1)
+albedo_texture = ExtResource("1_4p63e")
+normal_enabled = true
+normal_texture = ExtResource("2_v1kmm")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6u82b"]
+material = SubResource("StandardMaterial3D_ichqs")
+size = Vector2(4, 4)
+
+[node name="GrassToGound" type="MeshInstance3D" unique_id=1715873608]
+mesh = SubResource("PlaneMesh_6u82b")

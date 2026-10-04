@@ -10,8 +10,14 @@ config_version=5
 
 [application]
 
-config/name="MobaClient"
-config/features=PackedStringArray("4.7", "GL Compatibility")
+config/name="TestClient"
+run/main_scene="uid://py2hlo4pau0t"
+config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
+
+[autoload]
+
+HttpClient="*uid://dwhhd8ffb7lcl"
+SceneManager="*uid://brub3cmqy2536"
 
 [display]
 
@@ -20,7 +26,7 @@ window/stretch/aspect="expand"
 
 [dotnet]
 
-project/assembly_name="MobaClient"
+project/assembly_name="TestServer"
 
 [physics]
 

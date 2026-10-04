@@ -1,10 +1,9 @@
 using System.Security.Claims;
 using Data;
-using DTOs;
-using DTOs.MatchmakeCSSC;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Moba.Shared.MasterServerDto;
 using Moba.Shared.MatchmakerLibs;
 using NATS.Client.Core;
 using NATS.Client.Serializers.Json;
@@ -39,6 +38,7 @@ public class MatchmakeController : ControllerBase
 
            
          var user = await _context.Users
+            .AsNoTracking()
             .FirstOrDefaultAsync(p => p.Id == userId);
 
         if (user == null)

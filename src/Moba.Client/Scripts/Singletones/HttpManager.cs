@@ -106,5 +106,35 @@ public partial class HttpManager : Node
 
 	}
 
+	public async Task<bool> FindMatchAsync(JoinQueueRequestDto dto)
+	{
+		
+		try
+		{
+			
+			var response = await _client.PostAsJsonAsync("api/Matchmake/join-queue", dto);
+
+			if (response.IsSuccessStatusCode)
+			{
+				GD.Print($"[Http Manager] Stand in queue successfully");
+				return true;
+			}
+
+			string errorText = await response.Content.ReadAsStringAsync();
+			GD.PrintErr($"[HTTP Error {(int)response.StatusCode}]: {errorText}");
+
+			return false;
+
+		}
+		catch (Exception e)
+		{
+			
+			GD.Print($"Oops.. Something went wrong. Exception:{e.Message}");
+			return false;
+
+		}
+
+	}
+
 
 }

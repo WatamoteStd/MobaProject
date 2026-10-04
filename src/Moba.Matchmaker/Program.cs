@@ -21,6 +21,21 @@ loop.Start();
 Console.WriteLine("=================== MATCHMAKER WORKS ====================");
 Console.WriteLine($"= Version:{ver} =");
 
+while (true)
+{
+    try
+    {
+        await nats.ConnectAsync();
+        Console.WriteLine("[Matchmaker] Connected to NATS successfully!");
+        break;
+    }
+    catch (NatsException ex)
+    {
+        Console.WriteLine($"[Matchmaker] Waiting for NATS... ({ex.Message})");
+        await Task.Delay(500);
+    }
+}
+
 await foreach(var msg in nats.SubscribeAsync<EnqueuePlayerMessage>("matchmaking.requests"))
 {
     var packet = msg.Data;

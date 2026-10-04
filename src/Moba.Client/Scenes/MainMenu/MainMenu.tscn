@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://oyideadbh36b"]
 
+[ext_resource type="Script" uid="uid://dv6utyccuutiu" path="res://Scenes/MainMenu/MainMenu.cs" id="1_c7oo3"]
+[ext_resource type="Script" uid="uid://82t8433sj1ot" path="res://Scenes/MainMenu/LobbyMenu.cs" id="2_sg7ab"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83fg3"]
 content_margin_left = 10.0
 content_margin_top = 10.0
@@ -39,6 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_c7oo3")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1484054045]
 layout_mode = 1
@@ -49,12 +53,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_83fg3")
 
-[node name="LobbyMenu" type="PanelContainer" parent="PanelContainer" unique_id=1211135292]
+[node name="LobbyMenu" type="PanelContainer" parent="PanelContainer" unique_id=1211135292 node_paths=PackedStringArray("_currentModeLabel", "_soloModeButton", "_trioModeButton", "_fullModeButton", "_findMatchButton")]
 custom_minimum_size = Vector2(450, 300)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_ichqs")
+script = ExtResource("2_sg7ab")
+_currentModeLabel = NodePath("Content/Selected/SelectedGameMode2")
+_soloModeButton = NodePath("Content/Modes/Solo")
+_trioModeButton = NodePath("Content/Modes/Trio")
+_fullModeButton = NodePath("Content/Modes/Full")
+_findMatchButton = NodePath("Content/FindLobby")
 
 [node name="Content" type="VBoxContainer" parent="PanelContainer/LobbyMenu" unique_id=496431377]
 layout_mode = 2
@@ -69,7 +79,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.69693524, 0.6990257, 0.6339283, 1)
 theme_override_font_sizes/font_size = 23
-text = "SELECT GAME MODE"
+text = "MATCH"
 
 [node name="Modes" type="HBoxContainer" parent="PanelContainer/LobbyMenu/Content" unique_id=1472977072]
 layout_mode = 2
@@ -98,7 +108,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_nl4gn")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cdkru")
 text = "3 v 3"
 
-[node name="Trio2" type="Button" parent="PanelContainer/LobbyMenu/Content/Modes" unique_id=608813247]
+[node name="Full" type="Button" parent="PanelContainer/LobbyMenu/Content/Modes" unique_id=608813247]
 custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -113,7 +123,21 @@ text = "5 v 5"
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/LobbyMenu/Content" unique_id=605543337]
 layout_mode = 2
 
-[node name="Trio" type="Button" parent="PanelContainer/LobbyMenu/Content" unique_id=742395057]
+[node name="Selected" type="HBoxContainer" parent="PanelContainer/LobbyMenu/Content" unique_id=118476630]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/LobbyMenu/Content/Selected" unique_id=1773618179]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Selected mode:"
+
+[node name="SelectedGameMode2" type="Label" parent="PanelContainer/LobbyMenu/Content/Selected" unique_id=539294831]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.48171192, 0.6057175, 0.91058165, 1)
+theme_override_font_sizes/font_size = 18
+text = "none"
+
+[node name="FindLobby" type="Button" parent="PanelContainer/LobbyMenu/Content" unique_id=742395057]
 custom_minimum_size = Vector2(160, 40)
 layout_mode = 2
 size_flags_horizontal = 6

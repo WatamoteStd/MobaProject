@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dh1d1x6yxti3w"]
+
+[ext_resource type="Texture2D" uid="uid://dioon3c5dfbxh" path="res://Assets/Map/TileGrass_Ground/ground_tile.jpg" id="1_v265j"]
+[ext_resource type="Texture2D" uid="uid://dt8e823burxxh" path="res://Assets/Map/TileGrass_Ground/ground_tile_normal.png" id="2_wqhtx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ichqs"]
+albedo_color = Color(0.667027, 0.40300897, 1.92523e-07, 1)
+albedo_texture = ExtResource("1_v265j")
+normal_enabled = true
+normal_texture = ExtResource("2_wqhtx")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6u82b"]
+material = SubResource("StandardMaterial3D_ichqs")
+size = Vector2(4, 4)
+
+[node name="Ground_tile" type="MeshInstance3D" unique_id=1621332427]
+mesh = SubResource("PlaneMesh_6u82b")
