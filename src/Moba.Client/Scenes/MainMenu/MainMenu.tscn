@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dv6utyccuutiu" path="res://Scenes/MainMenu/MainMenu.cs" id="1_c7oo3"]
 [ext_resource type="Script" uid="uid://82t8433sj1ot" path="res://Scenes/MainMenu/LobbyMenu.cs" id="2_sg7ab"]
+[ext_resource type="Script" uid="uid://b7vtfs5fehskp" path="res://Scenes/MainMenu/QueuePanel.cs" id="3_sg7ab"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83fg3"]
 content_margin_left = 10.0
@@ -35,7 +36,34 @@ bg_color = Color(0.41598046, 0.41598043, 0.4159804, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpx3y"]
 bg_color = Color(0.5198213, 0.5198213, 0.5198212, 1)
 
-[node name="Control" type="Control" unique_id=1861006175]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6u82b"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.56453633, 0.13314044, 0.125747, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qm0se"]
+content_margin_left = 5.0
+content_margin_top = 3.0
+content_margin_right = 5.0
+content_margin_bottom = 3.0
+bg_color = Color(0.46119452, 0.4742782, 0.8370215, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ua038"]
+content_margin_left = 5.0
+content_margin_top = 3.0
+content_margin_right = 5.0
+content_margin_bottom = 3.0
+bg_color = Color(0.41086313, 0.41651374, 0.7905234, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vapy7"]
+content_margin_left = 5.0
+content_margin_top = 3.0
+content_margin_right = 5.0
+content_margin_bottom = 3.0
+bg_color = Color(0.4950596, 0.51012367, 0.8567815, 1)
+
+[node name="Control" type="Control" unique_id=1861006175 node_paths=PackedStringArray("_lobbyMenu", "_queuePanel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,8 +71,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_c7oo3")
+_lobbyMenu = NodePath("Content/LobbyMenu")
+_queuePanel = NodePath("Content/QueuePanel")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1484054045]
+[node name="Content" type="PanelContainer" parent="." unique_id=1484054045]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,7 +83,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_83fg3")
 
-[node name="LobbyMenu" type="PanelContainer" parent="PanelContainer" unique_id=1211135292 node_paths=PackedStringArray("_currentModeLabel", "_soloModeButton", "_trioModeButton", "_fullModeButton", "_findMatchButton")]
+[node name="LobbyMenu" type="PanelContainer" parent="Content" unique_id=1211135292 node_paths=PackedStringArray("_currentModeLabel", "_soloModeButton", "_trioModeButton", "_fullModeButton", "_findMatchButton")]
 custom_minimum_size = Vector2(450, 300)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -66,25 +96,25 @@ _trioModeButton = NodePath("Content/Modes/Trio")
 _fullModeButton = NodePath("Content/Modes/Full")
 _findMatchButton = NodePath("Content/FindLobby")
 
-[node name="Content" type="VBoxContainer" parent="PanelContainer/LobbyMenu" unique_id=496431377]
+[node name="Content" type="VBoxContainer" parent="Content/LobbyMenu" unique_id=496431377]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="Header" type="HBoxContainer" parent="PanelContainer/LobbyMenu/Content" unique_id=58314118]
+[node name="Header" type="HBoxContainer" parent="Content/LobbyMenu/Content" unique_id=58314118]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Title" type="Label" parent="PanelContainer/LobbyMenu/Content/Header" unique_id=1101294657]
+[node name="Title" type="Label" parent="Content/LobbyMenu/Content/Header" unique_id=1101294657]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.69693524, 0.6990257, 0.6339283, 1)
 theme_override_font_sizes/font_size = 23
 text = "MATCH"
 
-[node name="Modes" type="HBoxContainer" parent="PanelContainer/LobbyMenu/Content" unique_id=1472977072]
+[node name="Modes" type="HBoxContainer" parent="Content/LobbyMenu/Content" unique_id=1472977072]
 layout_mode = 2
 
-[node name="Solo" type="Button" parent="PanelContainer/LobbyMenu/Content/Modes" unique_id=1123616271]
+[node name="Solo" type="Button" parent="Content/LobbyMenu/Content/Modes" unique_id=1123616271]
 custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -96,7 +126,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_nl4gn")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cdkru")
 text = "1 v 1"
 
-[node name="Trio" type="Button" parent="PanelContainer/LobbyMenu/Content/Modes" unique_id=1108801711]
+[node name="Trio" type="Button" parent="Content/LobbyMenu/Content/Modes" unique_id=1108801711]
 custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -108,7 +138,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_nl4gn")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cdkru")
 text = "3 v 3"
 
-[node name="Full" type="Button" parent="PanelContainer/LobbyMenu/Content/Modes" unique_id=608813247]
+[node name="Full" type="Button" parent="Content/LobbyMenu/Content/Modes" unique_id=608813247]
 custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -120,24 +150,24 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_nl4gn")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cdkru")
 text = "5 v 5"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/LobbyMenu/Content" unique_id=605543337]
+[node name="HSeparator" type="HSeparator" parent="Content/LobbyMenu/Content" unique_id=605543337]
 layout_mode = 2
 
-[node name="Selected" type="HBoxContainer" parent="PanelContainer/LobbyMenu/Content" unique_id=118476630]
+[node name="Selected" type="HBoxContainer" parent="Content/LobbyMenu/Content" unique_id=118476630]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="PanelContainer/LobbyMenu/Content/Selected" unique_id=1773618179]
+[node name="Title" type="Label" parent="Content/LobbyMenu/Content/Selected" unique_id=1773618179]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Selected mode:"
 
-[node name="SelectedGameMode2" type="Label" parent="PanelContainer/LobbyMenu/Content/Selected" unique_id=539294831]
+[node name="SelectedGameMode2" type="Label" parent="Content/LobbyMenu/Content/Selected" unique_id=539294831]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.48171192, 0.6057175, 0.91058165, 1)
 theme_override_font_sizes/font_size = 18
 text = "none"
 
-[node name="FindLobby" type="Button" parent="PanelContainer/LobbyMenu/Content" unique_id=742395057]
+[node name="FindLobby" type="Button" parent="Content/LobbyMenu/Content" unique_id=742395057]
 custom_minimum_size = Vector2(160, 40)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -147,3 +177,43 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_c7oo3")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_sg7ab")
 theme_override_styles/hover = SubResource("StyleBoxFlat_kpx3y")
 text = "Find lobby"
+
+[node name="QueuePanel" type="PanelContainer" parent="Content" unique_id=787522137 node_paths=PackedStringArray("_timeLabel", "_leaveQueue")]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6u82b")
+script = ExtResource("3_sg7ab")
+_timeLabel = NodePath("VBoxContainer/Text/Time")
+_leaveQueue = NodePath("VBoxContainer/LeaveQueue")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/QueuePanel" unique_id=658237361]
+layout_mode = 2
+
+[node name="Text" type="HBoxContainer" parent="Content/QueuePanel/VBoxContainer" unique_id=2011857144]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Title" type="Label" parent="Content/QueuePanel/VBoxContainer/Text" unique_id=1241563626]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "TIME IN QUEUE:"
+
+[node name="Time" type="Label" parent="Content/QueuePanel/VBoxContainer/Text" unique_id=412710604]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.43822256, 0.63765556, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "0s"
+
+[node name="LeaveQueue" type="Button" parent="Content/QueuePanel/VBoxContainer" unique_id=1338031519]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_qm0se")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ua038")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vapy7")
+text = "Left Queue"

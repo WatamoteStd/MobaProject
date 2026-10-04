@@ -14,6 +14,7 @@ public class PacketCatcher
     private readonly Socket _socket;
     public bool IsWork {get; private set; } = false;
     private byte[] buffer = new byte[2048];
+    private byte[] _sendBuffer = new byte[2048];
 
     public PacketCatcher(Socket socket)
     {
@@ -41,6 +42,8 @@ public class PacketCatcher
 
             ReadOnlySpan<byte> payload = receivedSpan[2..];
 
+            // PACKETS LOGIC
+
             switch (packetType)
             {
                 
@@ -49,6 +52,14 @@ public class PacketCatcher
                         var ping = new PingPacket();
                         PacketTranslator.Read(payload, ref ping);
                         Console.WriteLine($"Received ping packet. Value:{ping.Ping}. Ip:{result.RemoteEndPoint}");
+
+                        var pong = new PongPacket { Pong = ping.Ping};
+                        int writenBytes = PacketTranslator.Write(PacketTypes.Pong, _sendBuffer, ref pong);
+
+                        await _socket.SendToAsync(_sendBuffer.AsMemory(0, writenBytes), SocketFlags.None, result.RemoteEndPoint);
+
+                        Console.WriteLine($"Send pong packet to IP:{result.RemoteEndPoint}");
+
                     }
                 break;
 
