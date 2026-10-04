@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Net.Http;
 using System.Text;
 using System.Net.Http.Json;
+using Moba.Shared.MatchmakerLibs.MatchQueue;
 
 public partial class HttpManager : Node
 {
@@ -132,6 +133,21 @@ public partial class HttpManager : Node
 			GD.Print($"Oops.. Something went wrong. Exception:{e.Message}");
 			return false;
 
+		}
+
+	}
+
+	public async Task<QueuePlayerStatusResponse> QueuePingAsync()
+	{
+		try
+		{
+			
+			return await _client.GetFromJsonAsync<QueuePlayerStatusResponse>("api/Matchmake/queue-status");
+		}
+		catch (Exception e)
+		{
+			GD.PrintErr($"[QueuePing] Network error: {e.Message}");
+			return new QueuePlayerStatusResponse(QueuePlayerStatus.NotFound, string.Empty, -1);
 		}
 
 	}

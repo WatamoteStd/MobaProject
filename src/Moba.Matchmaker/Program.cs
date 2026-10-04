@@ -3,6 +3,7 @@ using Moba.Matchmaker;
 using Moba.Matchmaker.Core;
 using Moba.Matchmaker.Entities;
 using Moba.Shared.MatchmakerLibs;
+using Moba.Shared.MatchmakerLibs.MatchQueue;
 using NATS.Client.Core;
 using NATS.Client.Serializers.Json;
 using NATS.Net;
@@ -21,24 +22,44 @@ loop.Start();
 Console.WriteLine("=================== MATCHMAKER WORKS ====================");
 Console.WriteLine($"= Version:{ver} =");
 
-while (true)
-{
-    try
-    {
-        await nats.ConnectAsync();
-        Console.WriteLine("[Matchmaker] Connected to NATS successfully!");
-        break;
-    }
-    catch (NatsException ex)
-    {
-        Console.WriteLine($"[Matchmaker] Waiting for NATS... ({ex.Message})");
-        await Task.Delay(500);
-    }
-}
+await nats.ConnectAsync();
+Console.WriteLine("\n[Matchmaker] Connected to NATS!");
 
-await foreach(var msg in nats.SubscribeAsync<EnqueuePlayerMessage>("matchmaking.requests"))
+Task taskEnqueue = Task.Run(async () =>
 {
-    var packet = msg.Data;
+    await foreach(var msg in nats.SubscribeAsync<EnqueuePlayerMessage>("matchmaking.requests"))
+    {
+        var packet = msg.Data;
+        manager.AddPlayer(new PoolPlayer(packet.PlayerId, packet.MMR), packet.Mode);
+    }
+});
 
-    manager.AddPlayer(new PoolPlayer(packet.PlayerId, packet.MMR), packet.Mode);
-}
+Task taskStatus = Task.Run(async () =>
+{
+    await foreach(var msg in nats.SubscribeAsync<long>("matchmaker.player.status"))
+    {
+
+        long userId = msg.Data;
+
+        bool isFound = manager.GetPlayer(userId, out var player);
+        Console.WriteLine($"[NATS: Task Status] new request from Id:{userId}. IsFound:{isFound}");
+
+        QueuePlayerStatusResponse response;
+
+        if (isFound)
+        {
+            response = new QueuePlayerStatusResponse(QueuePlayerStatus.Search, string.Empty, 0);
+        }
+        else
+        {
+            response = new QueuePlayerStatusResponse(QueuePlayerStatus.NotFound, string.Empty, 0);
+        }
+
+        await msg.ReplyAsync(response);
+
+        Console.WriteLine($"[NATS: Task Stratus] Reply successfully send to MasterServer!");
+
+    }
+});
+
+await Task.WhenAll(taskEnqueue, taskStatus);

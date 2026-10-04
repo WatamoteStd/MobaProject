@@ -56,7 +56,6 @@ public partial class LobbyMenu : PanelContainer
 			if (isOk)
 			{
 				OnStandInQueue?.Invoke();
-				Visible = false;
 			}
 
 
@@ -66,6 +65,19 @@ public partial class LobbyMenu : PanelContainer
 			GD.Print($"[Lobby Manager] Something went wrong in http manager. Exception:{e.Message}");
 		}
 		
+
+	}
+
+	public void ShowCustom()
+	{
+		
+		Visible = true;
+
+	}
+	public void HideCustom()
+	{
+		
+		Visible = false;
 
 	}
 

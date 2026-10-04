@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dv6utyccuutiu" path="res://Scenes/MainMenu/MainMenu.cs" id="1_c7oo3"]
 [ext_resource type="Script" uid="uid://82t8433sj1ot" path="res://Scenes/MainMenu/LobbyMenu.cs" id="2_sg7ab"]
 [ext_resource type="Script" uid="uid://b7vtfs5fehskp" path="res://Scenes/MainMenu/QueuePanel.cs" id="3_sg7ab"]
+[ext_resource type="Script" uid="uid://30mi7qawt6a8" path="res://Scenes/MainMenu/DebugPanel.cs" id="4_kpx3y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83fg3"]
 content_margin_left = 10.0
@@ -63,6 +64,16 @@ content_margin_right = 5.0
 content_margin_bottom = 3.0
 bg_color = Color(0.4950596, 0.51012367, 0.8567815, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w4wer"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.38885453, 0.38273814, 0.39525816, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_83fg3"]
+color = Color(1, 1, 1, 1)
+
 [node name="Control" type="Control" unique_id=1861006175 node_paths=PackedStringArray("_lobbyMenu", "_queuePanel")]
 layout_mode = 3
 anchors_preset = 15
@@ -73,6 +84,7 @@ grow_vertical = 2
 script = ExtResource("1_c7oo3")
 _lobbyMenu = NodePath("Content/LobbyMenu")
 _queuePanel = NodePath("Content/QueuePanel")
+QueueCheckCooldown = 5.0
 
 [node name="Content" type="PanelContainer" parent="." unique_id=1484054045]
 layout_mode = 1
@@ -179,6 +191,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_kpx3y")
 text = "Find lobby"
 
 [node name="QueuePanel" type="PanelContainer" parent="Content" unique_id=787522137 node_paths=PackedStringArray("_timeLabel", "_leaveQueue")]
+visible = false
 custom_minimum_size = Vector2(250, 70)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -217,3 +230,85 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_qm0se")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ua038")
 theme_override_styles/hover = SubResource("StyleBoxFlat_vapy7")
 text = "Left Queue"
+
+[node name="DebugPanel" type="PanelContainer" parent="Content" unique_id=1461235791 node_paths=PackedStringArray("_main", "_isWorkLabel", "_pickCountLabel", "_basicPingTime", "_currentPingTime")]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_w4wer")
+script = ExtResource("4_kpx3y")
+_main = NodePath("../..")
+_isWorkLabel = NodePath("VBoxContainer/Mode/Mode")
+_pickCountLabel = NodePath("VBoxContainer/PingCount/PingCount")
+_basicPingTime = NodePath("VBoxContainer/PingSettings/PingSettings")
+_currentPingTime = NodePath("VBoxContainer/CurTime/CurTime")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/DebugPanel" unique_id=1095460040]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Header" type="HBoxContainer" parent="Content/DebugPanel/VBoxContainer" unique_id=129709771]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Title" type="Label" parent="Content/DebugPanel/VBoxContainer/Header" unique_id=1886369073]
+layout_mode = 2
+theme_override_colors/font_color = Color(9.62615e-07, 0.79753745, 0.62892693, 1)
+text = "QUEUE DEBUG PANEL"
+
+[node name="HSeparator" type="HSeparator" parent="Content/DebugPanel/VBoxContainer" unique_id=53662397]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_83fg3")
+
+[node name="Mode" type="HBoxContainer" parent="Content/DebugPanel/VBoxContainer" unique_id=156082623]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Content/DebugPanel/VBoxContainer/Mode" unique_id=1629447764]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8963674, 0.8963674, 0.8963674, 1)
+text = "Mode: "
+
+[node name="Mode" type="Label" parent="Content/DebugPanel/VBoxContainer/Mode" unique_id=1273475137]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.27442724, 0.60906094, 0.980009, 1)
+text = "None"
+
+[node name="PingCount" type="HBoxContainer" parent="Content/DebugPanel/VBoxContainer" unique_id=1362560968]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Content/DebugPanel/VBoxContainer/PingCount" unique_id=956006489]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8963674, 0.8963674, 0.8963674, 1)
+text = "Ping Count: "
+
+[node name="PingCount" type="Label" parent="Content/DebugPanel/VBoxContainer/PingCount" unique_id=1753642216]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.27442724, 0.60906094, 0.980009, 1)
+text = "0"
+
+[node name="PingSettings" type="HBoxContainer" parent="Content/DebugPanel/VBoxContainer" unique_id=2100893837]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Content/DebugPanel/VBoxContainer/PingSettings" unique_id=1378368787]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8963674, 0.8963674, 0.8963674, 1)
+text = "Basic Time"
+
+[node name="PingSettings" type="Label" parent="Content/DebugPanel/VBoxContainer/PingSettings" unique_id=318875482]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.27442724, 0.60906094, 0.980009, 1)
+text = "0.0"
+
+[node name="CurTime" type="HBoxContainer" parent="Content/DebugPanel/VBoxContainer" unique_id=737795055]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Content/DebugPanel/VBoxContainer/CurTime" unique_id=1269117244]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8963674, 0.8963674, 0.8963674, 1)
+text = "Current Time: "
+
+[node name="CurTime" type="Label" parent="Content/DebugPanel/VBoxContainer/CurTime" unique_id=551606586]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.27442724, 0.60906094, 0.980009, 1)
+text = "0.0"

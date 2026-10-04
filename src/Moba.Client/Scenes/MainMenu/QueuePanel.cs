@@ -28,15 +28,13 @@ public partial class QueuePanel : PanelContainer
 	{
 		_leaveQueue.Pressed += () =>
 		{
-			_isWork = false;
-			Visible = false;
 			OnLeaveButton?.Invoke();
 		};
 	}
 
 
 
-	public void Start()
+	public void ShowCustom()
 	{
 		
 		_queueTimer = 0.0f;
@@ -44,6 +42,16 @@ public partial class QueuePanel : PanelContainer
 		_isWork = true;
 
 		Visible = true;
+
+	}
+	public void HideCustom()
+	{
+		
+		_queueTimer = 0.0f;
+		_timeLabel.Text = "0";
+		_isWork = false;
+
+		Visible = false;
 
 	}
 

@@ -3,8 +3,10 @@ using Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Moba.Shared.MasterServerDto;
 using Moba.Shared.MatchmakerLibs;
+using Moba.Shared.MatchmakerLibs.MatchQueue;
 using NATS.Client.Core;
 using NATS.Client.Serializers.Json;
 
@@ -18,11 +20,13 @@ public class MatchmakeController : ControllerBase
     
     private readonly AppDbContext _context;
     private readonly INatsConnection _nats;
+    private readonly IMemoryCache _cache;
     
-    public MatchmakeController(AppDbContext context, INatsConnection nats)
+    public MatchmakeController(AppDbContext context, INatsConnection nats, IMemoryCache cache)
     {
         _context = context;
         _nats = nats;
+        _cache = cache;
     }
 
     [HttpPost("join-queue")]
@@ -55,6 +59,32 @@ public class MatchmakeController : ControllerBase
             );
         
         return Ok();
+
+    }
+
+    [HttpGet("queue-status")]
+    public async Task<IActionResult> QueueStatusAsync()
+    {
+        
+        var userIdClaims = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (string.IsNullOrEmpty(userIdClaims) || !long.TryParse(userIdClaims, out var userId))
+        {
+            return Unauthorized("Invalid player token");
+        }
+
+        if (_cache.TryGetValue($"match:{userId}", out QueuePlayerStatusResponse cachedStatus))
+        {
+            return Ok(cachedStatus);
+        }
+
+        var response = await _nats.RequestAsync<long, QueuePlayerStatusResponse>(
+            subject: "matchmaker.player.status",
+            data: userId,
+            replyOpts: new NatsSubOpts { Timeout = TimeSpan.FromSeconds(2) }
+        );
+
+        return Ok(response.Data);
 
     }
 
