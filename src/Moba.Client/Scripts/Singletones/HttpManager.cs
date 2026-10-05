@@ -141,8 +141,17 @@ public partial class HttpManager : Node
 	{
 		try
 		{
-			
-			return await _client.GetFromJsonAsync<QueuePlayerStatusResponse>("api/Matchmake/queue-status");
+
+			var options = new JsonSerializerOptions
+			{
+				PropertyNameCaseInsensitive = true
+			};
+			var response =  await _client.GetFromJsonAsync<QueuePlayerStatusResponse>("api/Matchmake/queue-status", options);
+			GD.Print($"[Queue Response] Status: {response.Status}");
+			GD.Print($"[Queue Response] IP: {response.Ip}");
+			GD.Print($"[Queue Response] PORT: {response.Port}\n\n");
+
+			return response;
 		}
 		catch (Exception e)
 		{

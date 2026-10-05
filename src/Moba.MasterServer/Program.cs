@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using NATS.Client.Hosting;
+using Services.Matchmake;
+using Microsoft.Extensions.Options;
+using NATS.Client.Serializers.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,11 +18,15 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 
 builder.Services.AddControllers();
-builder.Services.AddNats();
+builder.Services.AddNats(configureOpts: opts => opts with
+{
+    SerializerRegistry = NatsJsonSerializerRegistry.Default
+});
 
 builder.Services.AddMemoryCache();
 
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddHostedService<MatchReadyNatsListener>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

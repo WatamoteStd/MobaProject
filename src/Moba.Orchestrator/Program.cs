@@ -22,13 +22,13 @@ var channel = Channel.CreateUnbounded<MatchCreateInfo>(new UnboundedChannelOptio
     SingleWriter = true
 });
 
-var worker = new ProcessWorker(portManager, channel.Reader, 15);
-Task workerTask = Task.Run(() => worker.StartAsync(cts.Token));
-
 
 // OBV connection with NATS (nuts ;)
 var opts = NatsOpts.Default with { SerializerRegistry = NatsJsonSerializerRegistry.Default };
 await using var nats = new NatsClient(opts);
+
+var worker = new ProcessWorker(portManager, channel.Reader, 15, nats);
+Task workerTask = Task.Run(() => worker.StartAsync(cts.Token));
 
 
 // Start of the program

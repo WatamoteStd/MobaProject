@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Channels;
 using Core;
 using Moba.Shared.OrchestratorData;
+using NATS.Net;
 
 namespace Process;
 
@@ -12,18 +13,19 @@ public class ProcessWorker
 {
     private readonly PortManager _portManager;
     private readonly ChannelReader<MatchCreateInfo> _reader;
+    private readonly NatsClient _nats;
     private readonly string serverExePath = @"C:\MobaProject\src\Moba.TestServer\bin\Release\net10.0\win-x64\publish\Moba.TestServer.exe";
     public int MemoryDebugTime {get;}
 
 
     private ConcurrentDictionary<Guid, System.Diagnostics.Process> _matchIdToProcessId = new();
     
-    public ProcessWorker(PortManager portManager, ChannelReader<MatchCreateInfo> reader, int debugTime)
+    public ProcessWorker(PortManager portManager, ChannelReader<MatchCreateInfo> reader, int debugTime, NatsClient nats)
     {
         _portManager = portManager;
         _reader = reader;
         MemoryDebugTime = debugTime;
-
+        _nats = nats;
     }
 
     public async Task StartAsync(CancellationToken ct = default)
@@ -39,6 +41,21 @@ public class ProcessWorker
                 {
                     Console.WriteLine($"[Worker] Got port {port} for Match {matchInfo.MatchId}. Starting server process...");
                     StartServer(port, matchInfo.MatchId);
+
+                    Console.WriteLine($"[Worker] Get packet from matchmaker.");
+                    for(int i = 0; i < matchInfo.PlayerIds.Length; i++)
+                    {
+                        Console.WriteLine($"[Match Player[#{i}] Id:{matchInfo.PlayerIds[i]}]");
+                    }
+
+                    var pck = matchInfo with
+                    {
+                        Port = port,
+                        ServerIp = "127.0.0.1"
+                    };
+
+                    await _nats.PublishAsync("orchestrator.match.ready", pck, cancellationToken: ct);
+
                 }
                 else
                 {
@@ -109,9 +126,9 @@ public class ProcessWorker
 
 
             }
-            catch(InvalidOperationException)
+            catch (Exception)
             {
-                
+
             }
 
             Console.WriteLine($"[Memory Report] Total servers:{_matchIdToProcessId.Count}");

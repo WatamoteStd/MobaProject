@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://82t8433sj1ot" path="res://Scenes/MainMenu/LobbyMenu.cs" id="2_sg7ab"]
 [ext_resource type="Script" uid="uid://b7vtfs5fehskp" path="res://Scenes/MainMenu/QueuePanel.cs" id="3_sg7ab"]
 [ext_resource type="Script" uid="uid://30mi7qawt6a8" path="res://Scenes/MainMenu/DebugPanel.cs" id="4_kpx3y"]
+[ext_resource type="Script" uid="uid://dg242kqw0bke0" path="res://Scenes/MainMenu/MatchFoundPanel.cs" id="5_ua038"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83fg3"]
 content_margin_left = 10.0
@@ -74,7 +75,49 @@ bg_color = Color(0.38885453, 0.38273814, 0.39525816, 1)
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_83fg3"]
 color = Color(1, 1, 1, 1)
 
-[node name="Control" type="Control" unique_id=1861006175 node_paths=PackedStringArray("_lobbyMenu", "_queuePanel")]
+[sub_resource type="Gradient" id="Gradient_ua038"]
+colors = PackedColorArray(0.026738942, 0.56199735, 0.7815773, 0.15686275, 0.050962053, 0.6695336, 0.46925783, 0.15686275)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6u82b"]
+gradient = SubResource("Gradient_ua038")
+fill_from = Vector2(0.34375, 0.74715906)
+fill_to = Vector2(0.92329544, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ygr85"]
+draw_center = false
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.21563786, 0.5797955, 0.122123115, 1)
+border_blend = true
+shadow_size = 2
+
+[sub_resource type="Gradient" id="Gradient_vapy7"]
+colors = PackedColorArray(0, 0.5372549, 0, 1, 0, 0.18039216, 0, 0.76862746)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_83fg3"]
+gradient = SubResource("Gradient_vapy7")
+fill_to = Vector2(0.82670456, 0.88920456)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_irfkg"]
+bg_color = Color(0.1485787, 0.23875529, 0.07970547, 0.5647059)
+border_width_bottom = 2
+border_color = Color(0.039215688, 0.27450982, 0.003921569, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdr62"]
+bg_color = Color(0.18276292, 0.47661322, 0.06763288, 1)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qovt"]
+bg_color = Color(0.16277862, 0.42937377, 0.056608878, 1)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0hjx5"]
+bg_color = Color(0.21470651, 0.5485646, 0.08006107, 1)
+shadow_size = 1
+
+[node name="Control" type="Control" unique_id=1861006175 node_paths=PackedStringArray("_lobbyMenu", "_queuePanel", "_matchFoundPanel", "_screenClickBlocker")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,6 +127,8 @@ grow_vertical = 2
 script = ExtResource("1_c7oo3")
 _lobbyMenu = NodePath("Content/LobbyMenu")
 _queuePanel = NodePath("Content/QueuePanel")
+_matchFoundPanel = NodePath("Content/MatchFoundPanel")
+_screenClickBlocker = NodePath("Content/MouseStopper")
 QueueCheckCooldown = 5.0
 
 [node name="Content" type="PanelContainer" parent="." unique_id=1484054045]
@@ -312,3 +357,58 @@ text = "Current Time: "
 layout_mode = 2
 theme_override_colors/font_color = Color(0.27442724, 0.60906094, 0.980009, 1)
 text = "0.0"
+
+[node name="MouseStopper" type="Control" parent="Content" unique_id=377084035]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Content/MouseStopper" unique_id=1297954118]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_6u82b")
+
+[node name="MatchFoundPanel" type="PanelContainer" parent="Content" unique_id=723971469 node_paths=PackedStringArray("_confirmGameButton")]
+visible = false
+custom_minimum_size = Vector2(550, 180)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ygr85")
+script = ExtResource("5_ua038")
+_confirmGameButton = NodePath("VBoxContainer/AcceptGame")
+
+[node name="bg" type="TextureRect" parent="Content/MatchFoundPanel" unique_id=1364281286]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_83fg3")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/MatchFoundPanel" unique_id=2011204399]
+layout_mode = 2
+
+[node name="Title" type="PanelContainer" parent="Content/MatchFoundPanel/VBoxContainer" unique_id=630124495]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_irfkg")
+
+[node name="Label" type="Label" parent="Content/MatchFoundPanel/VBoxContainer/Title" unique_id=721329143]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.4133504, 0.77253836, 0.4374452, 1)
+theme_override_font_sizes/font_size = 18
+text = "MATCH FOUND"
+
+[node name="AcceptGame" type="Button" parent="Content/MatchFoundPanel/VBoxContainer" unique_id=1594527245]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_pdr62")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8qovt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0hjx5")
+text = "ACCEPT"

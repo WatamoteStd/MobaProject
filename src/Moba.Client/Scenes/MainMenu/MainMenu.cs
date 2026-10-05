@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 public partial class MainMenu : Control
 {
 	
-	public enum UserAction : byte { Idle, SearchGame};
+	public enum UserAction : byte { Idle, SearchGame, AcceptingGame};
 	public UserAction CurrentAction = UserAction.Idle;
 
 	[Export] private LobbyMenu _lobbyMenu;
 	[Export] private QueuePanel _queuePanel;
+	[Export] private MatchFoundPanel _matchFoundPanel;
+	[Export] private Control _screenClickBlocker;
 
 	[Export] public float QueueCheckCooldown { get; private set; } = 1.5f;
 	public float CurrentCheckCooldown {get; private set;} = 0.0f;
@@ -18,6 +20,7 @@ public partial class MainMenu : Control
 
 	public override void _Ready()
 	{
+		_screenClickBlocker.Visible = false;
 		
 		_lobbyMenu.OnStandInQueue += () =>
 		{
@@ -67,9 +70,43 @@ public partial class MainMenu : Control
 		
 		QueuePlayerStatusResponse response = await HttpManager.Instance.QueuePingAsync();
 
+		if (CurrentAction != UserAction.SearchGame) return;
+
+		switch(response.Status)
+		{
+			
+			case QueuePlayerStatus.Search:
+
+			break;
+
+			case QueuePlayerStatus.Find:
+				{
+					BlockScreenForGameConfirm();
+					_matchFoundPanel.ShowCustom();
+					CurrentAction = UserAction.AcceptingGame;
+				}
+			break;
+
+			case QueuePlayerStatus.NotFound:
+				{
+					_lobbyMenu.ShowCustom();
+					_queuePanel.HideCustom();
+					CurrentAction = UserAction.Idle;
+					UnblockScreen();
+				}
+			break;
+
+		}
 
 	}
 
-
+	private void BlockScreenForGameConfirm()
+	{
+		_screenClickBlocker.Visible = true;
+	}
+	private void UnblockScreen()
+	{
+		_screenClickBlocker.Visible = false;
+	}
 
 }

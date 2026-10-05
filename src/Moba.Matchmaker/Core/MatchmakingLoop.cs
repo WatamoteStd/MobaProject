@@ -68,7 +68,9 @@ public class MatchmakingLoop
                     var matchDto = new MatchCreateInfo(
                         MatchId: Guid.NewGuid(),
                         GameMode: MatchProperty.Solo,
-                        PlayerIds: pIds
+                        PlayerIds: pIds,
+                        Port: -1,
+                        ServerIp: "0.15.0"
                     );
 
                     _nats.PublishAsync(
@@ -107,7 +109,9 @@ public class MatchmakingLoop
                     var matchDto = new MatchCreateInfo(
                         MatchId: Guid.NewGuid(),
                         GameMode: MatchProperty.Trio,
-                        PlayerIds: pIds
+                        PlayerIds: pIds,
+                        Port: -1,
+                        ServerIp: "0.15.0"
                     );
 
                     _nats.PublishAsync(
@@ -146,7 +150,9 @@ public class MatchmakingLoop
                     var matchDto = new MatchCreateInfo(
                         MatchId: Guid.NewGuid(),
                         GameMode: MatchProperty.Full,
-                        PlayerIds: pIds
+                        PlayerIds: pIds,
+                        Port: -1,
+                        ServerIp: "0.15.0"
                     );
 
                     _nats.PublishAsync(
