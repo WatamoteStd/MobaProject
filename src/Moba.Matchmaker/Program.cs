@@ -13,7 +13,7 @@ await using var nats = new NatsClient(opts);
 
 MatchmakingManager manager = new MatchmakingManager();
 MatchmakingEngine engine = new MatchmakingEngine(100, 10);
-MatchmakingLoop loop = new MatchmakingLoop(manager, engine);
+MatchmakingLoop loop = new MatchmakingLoop(manager, engine, nats);
 
 string ver = "pre-alpha:0.0.1";
 

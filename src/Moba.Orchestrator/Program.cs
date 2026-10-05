@@ -49,6 +49,7 @@ while(!cts.Token.IsCancellationRequested)
 
         await foreach(var msg in nats.SubscribeAsync<MatchCreateInfo>("matchmaking.created"))
         {
+            Console.WriteLine($"[Main] New match packet was taked.");
             var packet = msg.Data;
             await channel.Writer.WriteAsync(packet);
         }

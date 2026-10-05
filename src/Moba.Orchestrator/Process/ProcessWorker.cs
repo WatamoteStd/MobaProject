@@ -30,7 +30,6 @@ public class ProcessWorker
                 }
                 else
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine($"[Worker] No free ports avalible for match start!");
                 }
 

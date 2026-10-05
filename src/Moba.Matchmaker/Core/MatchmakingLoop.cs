@@ -1,4 +1,7 @@
 using Moba.Shared.MatchmakerLibs;
+using Moba.Shared.OrchestratorData;
+using NATS.Client.Serializers.Json;
+using NATS.Net;
 
 namespace Moba.Matchmaker.Core;
 
@@ -7,12 +10,14 @@ public class MatchmakingLoop
     
     private readonly MatchmakingManager _manager;
     private readonly MatchmakingEngine _engine;
+    private readonly NatsClient _nats;
     private readonly Thread _thread;
     public bool IsWork {get; private set;}= false;
-    public MatchmakingLoop(MatchmakingManager manager, MatchmakingEngine engine)
+    public MatchmakingLoop(MatchmakingManager manager, MatchmakingEngine engine, NatsClient nats)
     {
         _manager = manager;
         _engine = engine;
+        _nats = nats;
 
         _thread = new Thread(ProcessQueue);
         _thread.IsBackground = true;
@@ -47,13 +52,31 @@ public class MatchmakingLoop
                 
                 var matches = _engine.FindMatch(MatchProperty.Solo, soloSnap);  
 
-                foreach(var match in matches)
+                foreach(var m in matches)
                 {
-                    foreach(var p in match.Players)
+                    foreach(var p in m.Players)
                     {
                         _manager.RemovePlayer(p.PlayerId, MatchProperty.Solo);
                     }
-                    Console.WriteLine($"[MATCHMAKER] Собрана катка Solo! Игроков: {match.Players.Length}");
+                    long[] pIds = new long[m.Players.Length];
+                    for (int i = 0; i < m.Players.Length; i++)
+                    {
+                        pIds[i] = m.Players[i].PlayerId;
+                    }
+
+
+                    var matchDto = new MatchCreateInfo(
+                        MatchId: Guid.NewGuid(),
+                        GameMode: MatchProperty.Solo,
+                        PlayerIds: pIds
+                    );
+
+                    _nats.PublishAsync(
+                        subject: "matchmaking.created",
+                        data: matchDto,
+                        serializer: NatsJsonSerializer<MatchCreateInfo>.Default
+                    );
+                    Console.WriteLine($"[MATCHMAKER] Собрана катка Solo! Игроков: {m.Players.Length}");
                 }
                 
 
@@ -73,6 +96,26 @@ public class MatchmakingLoop
                     {
                         _manager.RemovePlayer(p.PlayerId, MatchProperty.Trio);
                     }
+
+                    long[] pIds = new long[m.Players.Length];
+                    for (int i = 0; i < m.Players.Length; i++)
+                    {
+                        pIds[i] = m.Players[i].PlayerId;
+                    }
+
+
+                    var matchDto = new MatchCreateInfo(
+                        MatchId: Guid.NewGuid(),
+                        GameMode: MatchProperty.Trio,
+                        PlayerIds: pIds
+                    );
+
+                    _nats.PublishAsync(
+                        subject: "matchmaking.created",
+                        data: matchDto,
+                        serializer: NatsJsonSerializer<MatchCreateInfo>.Default
+                    );
+
                     Console.WriteLine($"[MATCHMAKER] Собрана катка Trio! Игроков: {m.Players.Length}");
                 }
 
@@ -92,6 +135,25 @@ public class MatchmakingLoop
                     {
                         _manager.RemovePlayer(p.PlayerId, MatchProperty.Full);
                     }
+
+                    long[] pIds = new long[m.Players.Length];
+                    for (int i = 0; i < m.Players.Length; i++)
+                    {
+                        pIds[i] = m.Players[i].PlayerId;
+                    }
+
+
+                    var matchDto = new MatchCreateInfo(
+                        MatchId: Guid.NewGuid(),
+                        GameMode: MatchProperty.Full,
+                        PlayerIds: pIds
+                    );
+
+                    _nats.PublishAsync(
+                        subject: "matchmaking.created",
+                        data: matchDto,
+                        serializer: NatsJsonSerializer<MatchCreateInfo>.Default
+                    );
                     Console.WriteLine($"[MATCHMAKER] Собрана катка Full! Игроков: {m.Players.Length}");
                 }
 
