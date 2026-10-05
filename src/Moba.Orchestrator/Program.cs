@@ -15,14 +15,14 @@ Console.CancelKeyPress += (sender, eventArgs) =>
     cts.Cancel(); 
 };
 
-PortManager portManager = new PortManager(10, 5000);
+PortManager portManager = new PortManager(15, 30000);
 var channel = Channel.CreateUnbounded<MatchCreateInfo>(new UnboundedChannelOptions
 {
     SingleReader = true,
     SingleWriter = true
 });
 
-var worker = new ProcessWorker(portManager, channel.Reader);
+var worker = new ProcessWorker(portManager, channel.Reader, 15);
 Task workerTask = Task.Run(() => worker.StartAsync(cts.Token));
 
 
