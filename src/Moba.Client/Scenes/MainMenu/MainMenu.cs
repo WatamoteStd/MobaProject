@@ -84,6 +84,8 @@ public partial class MainMenu : Control
 					BlockScreenForGameConfirm();
 					_matchFoundPanel.ShowCustom();
 					CurrentAction = UserAction.AcceptingGame;
+
+					_queuePanel.HideCustom();
 				}
 			break;
 
@@ -92,6 +94,7 @@ public partial class MainMenu : Control
 					_lobbyMenu.ShowCustom();
 					_queuePanel.HideCustom();
 					CurrentAction = UserAction.Idle;
+					
 					UnblockScreen();
 				}
 			break;
