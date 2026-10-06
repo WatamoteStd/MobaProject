@@ -1,6 +1,12 @@
 ﻿
+using System.Net.Http.Headers;
+using System.Threading.Channels;
 using NetworkLayer;
+using NetworkLayer.DataStructs;
+using Phases;
 
+
+Channel<NetworkCommand> channel = Channel.CreateUnbounded<NetworkCommand>();
 
 int port = 5000;
 Guid matchId = Guid.Empty;
@@ -36,6 +42,7 @@ for (int i = 0; i < args.Length; i++)
 
 }
 
+
 Console.Title = $"Server Match: {matchId} [Port:{port}]";
 Console.WriteLine($"============================================");
 Console.WriteLine($"[Server] Match ID : {matchId}");
@@ -43,8 +50,10 @@ Console.WriteLine($"[Server] Binding Port: {port}");
 Console.WriteLine($"============================================\n");
 
 
-NetworkManager networkManager = new NetworkManager(port);
+NetworkManager networkManager = new NetworkManager(port, channel.Writer);
 networkManager.Start();
+
+PhaseManager _phaseManager = new PhaseManager(playersCount, channel.Reader, matchId);
 
 Console.WriteLine($"============================= TEST SERVER STARTED =======================");
 

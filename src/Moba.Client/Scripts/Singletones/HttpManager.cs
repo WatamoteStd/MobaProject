@@ -153,7 +153,7 @@ public partial class HttpManager : Node
 		catch (Exception e)
 		{
 			GD.PrintErr($"[QueuePing] Network error: {e.Message}");
-			return new QueuePlayerStatusResponse(QueuePlayerStatus.NotFound, string.Empty, -1);
+			return new QueuePlayerStatusResponse(QueuePlayerStatus.NotFound, string.Empty, -1, Guid.Empty);
 		}
 
 	}

@@ -48,11 +48,11 @@ Task taskStatus = Task.Run(async () =>
 
         if (isFound)
         {
-            response = new QueuePlayerStatusResponse(QueuePlayerStatus.Search, string.Empty, 0);
+            response = new QueuePlayerStatusResponse(QueuePlayerStatus.Search, string.Empty, 0, Guid.Empty);
         }
         else
         {
-            response = new QueuePlayerStatusResponse(QueuePlayerStatus.NotFound, string.Empty, 0);
+            response = new QueuePlayerStatusResponse(QueuePlayerStatus.NotFound, string.Empty, 0, Guid.Empty);
         }
 
         await msg.ReplyAsync(response);
