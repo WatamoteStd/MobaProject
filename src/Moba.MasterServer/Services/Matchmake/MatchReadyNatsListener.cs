@@ -41,7 +41,8 @@ public class MatchReadyNatsListener : BackgroundService
                         {
                             Ip = msg.Data.ServerIp,
                             Port = msg.Data.Port,
-                            Status = QueuePlayerStatus.Find
+                            Status = QueuePlayerStatus.Find,
+                            MatchId = msg.Data.MatchId
                         };
 
                         _cache.Set($"match:{curP}", info, TimeSpan.FromSeconds(120));
