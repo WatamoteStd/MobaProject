@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Net.Http.Json;
 using Moba.Shared.MatchmakerLibs.MatchQueue;
+using Moba.Shared.MasterServerDto.Nickname;
 
 public partial class HttpManager : Node
 {
@@ -154,6 +155,59 @@ public partial class HttpManager : Node
 		{
 			GD.PrintErr($"[QueuePing] Network error: {e.Message}");
 			return new QueuePlayerStatusResponse(QueuePlayerStatus.NotFound, string.Empty, -1, Guid.Empty);
+		}
+
+	}
+
+	public async Task<(bool isSucces, string Text)> ChangeNicknameAsync(ChangeNicknameRequestDto data)
+	{
+		
+		try
+		{
+			
+			var response = await _client.PostAsJsonAsync<ChangeNicknameRequestDto>("api/Nickname/change", data);
+
+			var content = await response.Content.ReadAsStringAsync();
+
+			if(response.IsSuccessStatusCode)
+			{
+				return (true, content);
+			}
+
+			return (false, "Invalid nickname.");
+
+		}
+
+		catch(Exception e)
+		{
+			GD.PrintErr($"[Profile] Network error: {e.Message}");
+			return (false, "Server error. Try again");
+		}
+
+	}
+
+	public async Task<string> GetNicknameAsync()
+	{
+		
+		try
+		{
+			
+			var response = await _client.GetAsync("api/Nickname/get");
+
+			var content = await response.Content.ReadAsStringAsync();
+
+			if(response.IsSuccessStatusCode)
+			{
+				return content;
+			}
+
+			return "Unkown";
+
+		}
+		catch(Exception e)
+		{
+			GD.PrintErr($"[Profile] Network error: {e.Message}");
+			return "Unknown";
 		}
 
 	}

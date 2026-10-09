@@ -9,5 +9,6 @@ public class User
     public string PasswordHash {get; set;} = string.Empty;
     public DateTime CreatedAt {get; set;} = DateTime.UtcNow;
     public int MMR {get; set;} = 100;
+    public string Nickname {get; set;} = string.Empty;
 
 }

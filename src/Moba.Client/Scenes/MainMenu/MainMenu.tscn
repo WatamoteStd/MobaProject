@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://vee20gmf4um3" path="res://Assets/Fonts/Cinzel/Cinzel-SemiBold.ttf" id="6_sng02"]
 [ext_resource type="Texture2D" uid="uid://d3rt15wrvej7i" path="res://Снимок.PNG" id="6_vapy7"]
 [ext_resource type="FontFile" uid="uid://djlxnh0uelnsn" path="res://Assets/Fonts/Cinzel/Cinzel-Bold.ttf" id="7_0hjx5"]
+[ext_resource type="PackedScene" uid="uid://b55ukttlp12ep" path="res://Scenes/MainMenu/ProfileWindow/ProfileScene.tscn" id="8_gkjg1"]
 [ext_resource type="Texture2D" uid="uid://b0g1qvu6y40ku" path="res://Scenes/MainMenu/Assets/Image/CategoryIcons/Heroes.png" id="8_k2pwb"]
 [ext_resource type="Texture2D" uid="uid://ytuxo14okr7" path="res://Scenes/MainMenu/Assets/Image/CategoryIcons/LadderIcon.png" id="8_lic31"]
 [ext_resource type="Texture2D" uid="uid://nryws45yxn52" path="res://Scenes/MainMenu/Assets/Image/CategoryIcons/Knowledge.png" id="10_ah1a3"]
@@ -147,6 +148,16 @@ border_width_bottom = 3
 border_color = Color(0.29586652, 0.2958665, 0.29586646, 1)
 border_blend = true
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gkjg1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5o35t"]
+bg_color = Color(0.15072992, 0.15072972, 0.15647024, 0.37254903)
+skew = Vector2(0.3, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ahojg"]
+bg_color = Color(0.3244873, 0.32448897, 0.33450577, 0.37254903)
+skew = Vector2(0.3, 0)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wh65k"]
 bg_color = Color(0.14132038, 0.14132038, 0.14483917, 1)
 skew = Vector2(0.3, 0)
@@ -250,7 +261,7 @@ shadow_size = 1
 bg_color = Color(0.21470651, 0.5485646, 0.08006107, 1)
 shadow_size = 1
 
-[node name="MainMenu" type="Control" unique_id=1861006175 node_paths=PackedStringArray("_lobbyMenu", "_queuePanel", "_matchFoundPanel", "_screenClickBlocker")]
+[node name="MainMenu" type="Control" unique_id=1861006175 node_paths=PackedStringArray("_lobbyMenu", "_queuePanel", "_matchFoundPanel", "_screenClickBlocker", "_profileWindow")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -262,6 +273,7 @@ _lobbyMenu = NodePath("Content/FreeSpace/Content/LobbyMenu")
 _queuePanel = NodePath("Content/FreeSpace/Content/QueuePanel")
 _matchFoundPanel = NodePath("Content/MatchFoundPanel")
 _screenClickBlocker = NodePath("Content/MouseStopper")
+_profileWindow = NodePath("Content/ProfileWindow")
 QueueCheckCooldown = 5.0
 
 [node name="bg" type="TextureRect" parent="." unique_id=1219672652]
@@ -289,7 +301,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_ichqs")
 [node name="Content" type="MarginContainer" parent="Content/FreeSpace" unique_id=694928973]
 layout_mode = 2
 theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 80
+theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 75
 
@@ -570,6 +582,11 @@ layout_mode = 2
 texture = SubResource("GradientTexture2D_vcdtc")
 expand_mode = 1
 
+[node name="ProfileWindow" parent="Content" unique_id=1764240686 node_paths=PackedStringArray("_openCloseButton", "_mainMenuNicknameLabel") instance=ExtResource("8_gkjg1")]
+layout_mode = 2
+_openCloseButton = NodePath("../TopPanel/Content/Profile/Button")
+_mainMenuNicknameLabel = NodePath("../TopPanel/Content/Profile/VBoxContainer/Nickname")
+
 [node name="TopPanel" type="PanelContainer" parent="Content" unique_id=806979667]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
@@ -617,6 +634,12 @@ theme_override_colors/font_color = Color(0.89059, 0.89059, 0.89058983, 1)
 theme_override_fonts/font = ExtResource("7_0hjx5")
 theme_override_font_sizes/font_size = 10
 text = "0"
+
+[node name="Button" type="Button" parent="Content/TopPanel/Content/Profile" unique_id=778502949]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gkjg1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5o35t")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ahojg")
 
 [node name="Heroes" type="Button" parent="Content/TopPanel/Content" unique_id=274070876]
 custom_minimum_size = Vector2(250, 0)

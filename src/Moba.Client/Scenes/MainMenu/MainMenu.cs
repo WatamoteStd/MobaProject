@@ -1,19 +1,26 @@
 using Godot;
 using Moba.Shared.MatchmakerLibs.MatchQueue;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public partial class MainMenu : Control
 {
 	
 	public enum UserAction : byte { Idle, SearchGame, AcceptingGame};
+	public enum InterfaceWindow : byte { None, Profile, Ladder, Knowledge, PathInfo}
 	public UserAction CurrentAction = UserAction.Idle;
+	public InterfaceWindow CurrentWindow  = InterfaceWindow.None;
 
+	private Dictionary<InterfaceWindow, PanelContainer> _windows = new();
 	
 	[Export] private LobbyMenu _lobbyMenu;
 	[Export] private QueuePanel _queuePanel;
 	[Export] private MatchFoundPanel _matchFoundPanel;
 	[Export] private Control _screenClickBlocker;
+
+
+	[Export] private ProfileWindow _profileWindow;
 
 	[Export] public float QueueCheckCooldown { get; private set; } = 1.5f;
 	public float CurrentCheckCooldown {get; private set;} = 0.0f;
@@ -44,6 +51,18 @@ public partial class MainMenu : Control
 			QueuePickCount = 0;
 		};
 
+
+		// WINDOWS
+
+		_windows[InterfaceWindow.Profile] = _profileWindow;
+
+		foreach(var wind in _windows.Values)
+		{
+			wind.Visible = false;
+		}
+
+		_profileWindow.OnButtonPressed += () => OpenWindow(InterfaceWindow.Profile);
+
 	}
 
 	public override void _Process(double delta)
@@ -65,6 +84,32 @@ public partial class MainMenu : Control
 		}
 
 	}
+
+
+	public void OpenWindow(InterfaceWindow window)
+	{
+		
+
+		if(CurrentWindow == window)
+		{
+			_windows[CurrentWindow].Visible = false;
+			CurrentWindow = InterfaceWindow.None;
+			return;
+		}
+		else if(CurrentWindow == InterfaceWindow.None)
+		{
+			_windows[window].Visible = true;
+			CurrentWindow = window;
+		}
+		else
+		{
+			_windows[CurrentWindow].Visible = false;
+			CurrentWindow = window;
+			_windows[window].Visible = true;
+		}
+
+	}
+
 
 	private async Task PingServerQueue()
 	{

@@ -1,0 +1,280 @@
+[gd_scene format=3 uid="uid://b55ukttlp12ep"]
+
+[ext_resource type="Script" uid="uid://cmep3jioobow3" path="res://Scenes/MainMenu/ProfileWindow/ProfileWindow.cs" id="1_m63fo"]
+[ext_resource type="FontFile" uid="uid://cpri1bdag8pjp" path="res://Assets/Fonts/Cinzel/Cinzel-ExtraBold.ttf" id="2_5t7dp"]
+[ext_resource type="FontFile" uid="uid://djlxnh0uelnsn" path="res://Assets/Fonts/Cinzel/Cinzel-Bold.ttf" id="3_xk0gy"]
+[ext_resource type="Texture2D" uid="uid://4w2hvj1g6qxl" path="res://Scenes/MainMenu/ProfileWindow/Icons/ChangeNameIcon.png" id="4_00mcj"]
+[ext_resource type="FontFile" uid="uid://ce67vyfubrkha" path="res://Assets/Fonts/Cinzel/Cinzel-Regular.ttf" id="5_00mcj"]
+[ext_resource type="Texture2D" uid="uid://luaky76i4duk" path="res://Scenes/MainMenu/ProfileWindow/Icons/ChangeNameHover.png" id="5_adihx"]
+[ext_resource type="Script" uid="uid://bd3qqpribpnks" path="res://Scenes/MainMenu/ProfileWindow/ChangeNicknameWindow.cs" id="6_vb1io"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5t7dp"]
+draw_center = false
+
+[sub_resource type="Gradient" id="Gradient_t0jtc"]
+colors = PackedColorArray(0.14117648, 0.14117648, 0.14509805, 1, 0.21416587, 0.2124635, 0.3025017, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pdr62"]
+gradient = SubResource("Gradient_t0jtc")
+fill_to = Vector2(0.34375, 0.03125)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_83fg3"]
+color = Color(0.27058825, 0.5176471, 0.8117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83fg3"]
+bg_color = Color(0.26297012, 0.25850987, 0.36294392, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.15686275, 0.15686275, 0.1764706, 1)
+border_blend = true
+
+[sub_resource type="Gradient" id="Gradient_5t7dp"]
+colors = PackedColorArray(0.14576429, 0.1466611, 0.14704534, 1, 0.23529412, 0.23529412, 0.24705882, 0.5803922)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_83fg3"]
+gradient = SubResource("Gradient_5t7dp")
+fill_to = Vector2(0.4971591, 0.41761363)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ichqs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vcdtc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qm0se"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xk0gy"]
+bg_color = Color(0.08627451, 0.08627451, 0.08627451, 0.6862745)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6u82b"]
+bg_color = Color(0.069994494, 0.08034281, 0.108611934, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.15946764, 0.17271155, 0.2256043, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adihx"]
+bg_color = Color(0.09625759, 0.105680995, 0.14336127, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2832797, 0.30109897, 0.3837454, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ichqs"]
+bg_color = Color(0.12812534, 0.13948986, 0.18490764, 1)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vb1io"]
+bg_color = Color(0.11008894, 0.12064808, 0.15937638, 1)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b31al"]
+bg_color = Color(0.1595456, 0.17316592, 0.22307846, 1)
+shadow_size = 1
+
+[node name="ProfileWindow" type="PanelContainer" unique_id=1764240686 node_paths=PackedStringArray("_blocker", "_blockerButton", "_nicknameLabel", "_changeNicknameWindow", "_changeNicknameButton")]
+custom_minimum_size = Vector2(500, 500)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5t7dp")
+script = ExtResource("1_m63fo")
+_blocker = NodePath("Blocker")
+_blockerButton = NodePath("Blocker/BlockerButton")
+_nicknameLabel = NodePath("Borders/HBoxContainer/FirstColumn/ProfilyBox/Borders/Content/NicknameBox/Nickname2/Nickname")
+_changeNicknameWindow = NodePath("ChangeNicknameWindow")
+_changeNicknameButton = NodePath("Borders/HBoxContainer/FirstColumn/ProfilyBox/Borders/Content/NicknameBox/ChangeName")
+
+[node name="bg" type="TextureRect" parent="." unique_id=1990859518]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_pdr62")
+expand_mode = 1
+
+[node name="Borders" type="MarginContainer" parent="." unique_id=465227416]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 85
+theme_override_constants/margin_right = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Borders" unique_id=1945226629]
+layout_mode = 2
+
+[node name="FirstColumn" type="VBoxContainer" parent="Borders/HBoxContainer" unique_id=758967199]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="Header" type="VBoxContainer" parent="Borders/HBoxContainer/FirstColumn" unique_id=1841145128]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Title" type="Label" parent="Borders/HBoxContainer/FirstColumn/Header" unique_id=6460119]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2713646, 0.516645, 0.8117035, 1)
+theme_override_fonts/font = ExtResource("2_5t7dp")
+theme_override_font_sizes/font_size = 39
+text = "PROFILE"
+
+[node name="HSeparator" type="HSeparator" parent="Borders/HBoxContainer/FirstColumn/Header" unique_id=1965575378]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_83fg3")
+
+[node name="ProfilyBox" type="PanelContainer" parent="Borders/HBoxContainer/FirstColumn" unique_id=725388068]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_83fg3")
+
+[node name="bg" type="TextureRect" parent="Borders/HBoxContainer/FirstColumn/ProfilyBox" unique_id=606816304]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_83fg3")
+
+[node name="Borders" type="MarginContainer" parent="Borders/HBoxContainer/FirstColumn/ProfilyBox" unique_id=1110075983]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Content" type="VBoxContainer" parent="Borders/HBoxContainer/FirstColumn/ProfilyBox/Borders" unique_id=1226575844]
+layout_mode = 2
+
+[node name="NicknameBox" type="HBoxContainer" parent="Borders/HBoxContainer/FirstColumn/ProfilyBox/Borders/Content" unique_id=902467504]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Nickname2" type="HBoxContainer" parent="Borders/HBoxContainer/FirstColumn/ProfilyBox/Borders/Content/NicknameBox" unique_id=1865762730]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Title" type="Label" parent="Borders/HBoxContainer/FirstColumn/ProfilyBox/Borders/Content/NicknameBox/Nickname2" unique_id=1102656305]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.62152386, 0.62152386, 0.6215238, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("3_xk0gy")
+theme_override_font_sizes/font_size = 21
+text = "NICKNAME: "
+
+[node name="Nickname" type="Label" parent="Borders/HBoxContainer/FirstColumn/ProfilyBox/Borders/Content/NicknameBox/Nickname2" unique_id=1761261786]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8454697, 0.87124115, 0.9000816, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("3_xk0gy")
+theme_override_font_sizes/font_size = 18
+text = "UnknownPlayer"
+
+[node name="ChangeName" type="TextureButton" parent="Borders/HBoxContainer/FirstColumn/ProfilyBox/Borders/Content/NicknameBox" unique_id=1520127550]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture_normal = ExtResource("4_00mcj")
+texture_hover = ExtResource("5_adihx")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Blocker" type="Control" parent="." unique_id=801681512]
+visible = false
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Blocker" unique_id=1237008289]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1254902, 0.1254902, 0.1254902, 0.70980394)
+
+[node name="BlockerButton" type="Button" parent="Blocker" unique_id=1146712060]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ichqs")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vcdtc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qm0se")
+
+[node name="ChangeNicknameWindow" type="PanelContainer" parent="." unique_id=1679606666 node_paths=PackedStringArray("_nicknameEdit", "_sendRequestButton")]
+custom_minimum_size = Vector2(450, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_xk0gy")
+script = ExtResource("6_vb1io")
+_nicknameEdit = NodePath("Borders/VBoxContainer/HBoxContainer/Nickname")
+_sendRequestButton = NodePath("Borders/VBoxContainer/HBoxContainer/Enter")
+
+[node name="Borders" type="MarginContainer" parent="ChangeNicknameWindow" unique_id=1351970737]
+layout_mode = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 7
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChangeNicknameWindow/Borders" unique_id=1538213463]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="ChangeNicknameWindow/Borders/VBoxContainer" unique_id=1424535155]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.8454697, 0.87124115, 0.9000816, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("3_xk0gy")
+theme_override_font_sizes/font_size = 18
+text = "ENTER NEW NICKNAME"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChangeNicknameWindow/Borders/VBoxContainer" unique_id=880622126]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Nickname" type="LineEdit" parent="ChangeNicknameWindow/Borders/VBoxContainer/HBoxContainer" unique_id=1555862729]
+custom_minimum_size = Vector2(250, 20)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7845985, 0.8336896, 0.83626986, 1)
+theme_override_fonts/font = ExtResource("5_00mcj")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_6u82b")
+theme_override_styles/focus = SubResource("StyleBoxFlat_adihx")
+max_length = 18
+
+[node name="Enter" type="Button" parent="ChangeNicknameWindow/Borders/VBoxContainer/HBoxContainer" unique_id=2062310803]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.74376863, 0.812129, 0.8491756, 1)
+theme_override_fonts/font = ExtResource("2_5t7dp")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_ichqs")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vb1io")
+theme_override_styles/hover = SubResource("StyleBoxFlat_b31al")
+text = "Enter"
+
+[node name="Tips" type="Label" parent="ChangeNicknameWindow/Borders/VBoxContainer" unique_id=1194736640]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.2773303, 0.31988898, 0.37522063, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("5_00mcj")
+theme_override_font_sizes/font_size = 14
+text = "* MAXIMUM SIZE IS 18 CHARS
+* CAN'T CONTAIN SPECIAL CHARS"
+
+[node name="BestTip" type="Label" parent="ChangeNicknameWindow/Borders/VBoxContainer" unique_id=383645298]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.42956573, 0.48321527, 0.5559848, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("5_00mcj")
+theme_override_font_sizes/font_size = 14
+text = "** USE YOUR IMAGINATION ;)"
