@@ -31,11 +31,16 @@ public class PacketCatcher
 
     public async Task ListenAsync()
     {
-        EndPoint endPoint = new IPEndPoint(IPAddress.Any, 0);
+        Console.WriteLine($"[PacketCatcher] Started listening on port: {((IPEndPoint)_socket.LocalEndPoint!).Port}");
         
-        while(IsWork)
+        try
         {
             
+            while(IsWork)
+        {
+            
+            EndPoint endPoint = new IPEndPoint(IPAddress.Any, 0);
+
             SocketReceiveFromResult result = await _socket.ReceiveFromAsync(buffer, endPoint);
 
             if (result.ReceivedBytes < 2) continue;
@@ -47,6 +52,8 @@ public class PacketCatcher
 
             ReadOnlySpan<byte> payload = receivedSpan[2..];
             int payloadLen = result.ReceivedBytes - 2;
+
+            Console.WriteLine($"[Network] Raw packet received! Bytes: {payloadLen} from {result.RemoteEndPoint}");
 
             // PACKETS LOGIC
 
@@ -72,6 +79,8 @@ public class PacketCatcher
 
                 default:
                     {
+
+
                         bool isOk = false;
                         byte[] rented;
                         if(payloadLen > 0)
@@ -92,7 +101,9 @@ public class PacketCatcher
                                 PlayerEndPoint = result.RemoteEndPoint
                             };
 
+
                             if (_channel.TryWrite(cmd)) isOk = true;
+                            Console.WriteLine($"[Packet Catcher] Packet:{packetType.ToString()} received and writen");
 
                         }
                         finally
@@ -110,6 +121,12 @@ public class PacketCatcher
 
         }
 
-    }
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine($"[PacketCatcher Error] {e.Message}");
+        }
+        
 
+    }
 }

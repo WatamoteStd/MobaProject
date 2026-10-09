@@ -17,15 +17,17 @@ public class PhaseManager
 
     private readonly Guid _matchGuid;
     private readonly ChannelReader<NetworkCommand> _channel;
+    private readonly HashSet<long> _allowedIds;
     private PlayerConnection[] _playersConnections;
     private int _curPlayerId = 0;
-    public PhaseManager(int playersCount, ChannelReader<NetworkCommand> channel, Guid matchGuid) 
+    public PhaseManager(int playersCount, ChannelReader<NetworkCommand> channel, Guid matchGuid, HashSet<long> playersIds) 
     {
         
         _playersConnections = new PlayerConnection[playersCount];
         _channel = channel;
 
         _matchGuid = matchGuid;
+        _allowedIds = playersIds;
 
         ChangePhase(Phases.WaitingForPlayers);
 
@@ -103,14 +105,15 @@ public class PhaseManager
                     C2S_HandshakePacket packet = default;
                     PacketTranslator.Read(cmd.Payload, ref packet);
 
-                    if (packet.SessionId == _matchGuid)
+                    if (packet.SessionId == _matchGuid && _allowedIds.Contains(packet.UserId))
                     {
 
                         for(int i = 0; i < _curPlayerId; i++)
                         {
-                            if (_playersConnections[i].EndPoint.Equals(cmd.PlayerEndPoint))
+                            if (_playersConnections[i].PlayerId == packet.UserId)
                             {
                                 _playersConnections[i].IsConnected = true;
+                                _playersConnections[i].EndPoint = cmd.PlayerEndPoint;
                                 return;
                             }
                         }
@@ -122,11 +125,13 @@ public class PhaseManager
                         {
                             Id = _curPlayerId,
                             IsConnected = true,
-                            EndPoint = cmd.PlayerEndPoint
+                            EndPoint = cmd.PlayerEndPoint,
+                            Nickname = packet.Nickname,
+                            PlayerId = packet.UserId
                         };
                         _playersConnections[_curPlayerId] = player;
 
-                        Console.WriteLine($"[PhaseManager] New player connected to the game. In matchId:{_curPlayerId}.");
+                        Console.WriteLine($"[PhaseManager] New player connected to the game. In matchId:{_curPlayerId} GlobalId:{player.PlayerId}, Nickname:{player.Nickname}.");
                         Console.WriteLine($"[PhaseManager] Players:{_curPlayerId + 1} / {_playersConnections.Length}");
 
                         _curPlayerId++;

@@ -131,6 +131,8 @@ public partial class MainMenu : Control
 					_matchFoundPanel.ShowCustom();
 					CurrentAction = UserAction.AcceptingGame;
 
+					GameSession.Instance.UpdateServerData(response);
+
 					_queuePanel.HideCustom();
 				}
 			break;

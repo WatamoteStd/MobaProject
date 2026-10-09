@@ -199,6 +199,7 @@ public partial class HttpManager : Node
 			{
 				var content = await response.Content.ReadFromJsonAsync<NicknameGetResponseDto>();
 				GameSession.Instance.UpdateUserId(content.userId);
+				GameSession.Instance.Nickname = content.nickname;
 				GD.Print($"[NICKNAME GET] USER ID CLAIMED:{content.userId}");
 				return content.nickname;
 			}

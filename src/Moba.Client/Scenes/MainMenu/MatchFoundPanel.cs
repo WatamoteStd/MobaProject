@@ -11,7 +11,12 @@ public partial class MatchFoundPanel : PanelContainer
 	public override void _Ready()
 	{
 		Visible = false;
-		_confirmGameButton.Pressed += () => OnGameConfirmed?.Invoke();
+		_confirmGameButton.Pressed += () =>
+		{
+			ClientUdp.Instance.ConnectAndSendHandshake();
+			OnGameConfirmed?.Invoke();
+			_confirmGameButton.Disabled = true;
+		};
 	}
 
 	public void ShowCustom()

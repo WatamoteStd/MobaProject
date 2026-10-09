@@ -70,8 +70,10 @@ Console.WriteLine($"============================================\n");
 NetworkManager networkManager = new NetworkManager(port, channel.Writer);
 networkManager.Start();
 
-PhaseManager _phaseManager = new PhaseManager(playersCount, channel.Reader, matchId);
+PhaseManager _phaseManager = new PhaseManager(playersCount, channel.Reader, matchId, allowedPlayers);
 
 Console.WriteLine($"============================= TEST SERVER STARTED =======================");
+
+_phaseManager.StartMatch();
 
 Thread.Sleep(Timeout.Infinite);

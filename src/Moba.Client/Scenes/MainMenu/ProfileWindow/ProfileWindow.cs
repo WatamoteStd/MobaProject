@@ -76,6 +76,7 @@ public partial class ProfileWindow : PanelContainer
 		
 		_nicknameLabel.Text = nickname;
 		_mainMenuNicknameLabel.Text = nickname;
+		GameSession.Instance.Nickname = nickname;
 
 	}
 

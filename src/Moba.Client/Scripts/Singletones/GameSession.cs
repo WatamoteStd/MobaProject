@@ -7,6 +7,7 @@ public partial class GameSession : Node
 	
 	public static GameSession Instance {get; private set;}
 	public long UserId {get; private set;}
+	public string Nickname {get; set;}
 	public Guid MatchId {get; private set;}
 	public string MatchIp {get; private set;}
 	public int MatchPort {get; private set;}
@@ -27,11 +28,6 @@ public partial class GameSession : Node
 		MatchId = data.MatchId;
 		MatchIp = data.Ip;
 		MatchPort = data.Port;
-
-		GD.Print($"[Game Session] Updated server data.");
-		GD.Print($"[Game Session] MatchId:{MatchId}");
-		GD.Print($"[Game Session] IP:{MatchIp}");
-		GD.Print($"[Game Session] Port:{MatchPort}");
 
 	}
 	public void UpdateUserId(long id)
