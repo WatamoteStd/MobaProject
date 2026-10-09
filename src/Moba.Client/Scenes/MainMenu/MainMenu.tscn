@@ -4,39 +4,85 @@
 [ext_resource type="Script" uid="uid://82t8433sj1ot" path="res://Scenes/MainMenu/LobbyMenu.cs" id="2_sg7ab"]
 [ext_resource type="Script" uid="uid://b7vtfs5fehskp" path="res://Scenes/MainMenu/QueuePanel.cs" id="3_sg7ab"]
 [ext_resource type="Script" uid="uid://30mi7qawt6a8" path="res://Scenes/MainMenu/DebugPanel.cs" id="4_kpx3y"]
+[ext_resource type="Script" uid="uid://bx1p62lu63qyb" path="res://Scenes/MainMenu/BottopPanel.cs" id="5_fv0xt"]
 [ext_resource type="Script" uid="uid://dg242kqw0bke0" path="res://Scenes/MainMenu/MatchFoundPanel.cs" id="5_ua038"]
+[ext_resource type="FontFile" uid="uid://w4eixgrru43i" path="res://Assets/Fonts/Cinzel/Cinzel-Medium.ttf" id="6_8qovt"]
+[ext_resource type="FontFile" uid="uid://vee20gmf4um3" path="res://Assets/Fonts/Cinzel/Cinzel-SemiBold.ttf" id="6_sng02"]
+[ext_resource type="Texture2D" uid="uid://d3rt15wrvej7i" path="res://Снимок.PNG" id="6_vapy7"]
+[ext_resource type="FontFile" uid="uid://djlxnh0uelnsn" path="res://Assets/Fonts/Cinzel/Cinzel-Bold.ttf" id="7_0hjx5"]
+[ext_resource type="Texture2D" uid="uid://b0g1qvu6y40ku" path="res://Scenes/MainMenu/Assets/Image/CategoryIcons/Heroes.png" id="8_k2pwb"]
+[ext_resource type="Texture2D" uid="uid://ytuxo14okr7" path="res://Scenes/MainMenu/Assets/Image/CategoryIcons/LadderIcon.png" id="8_lic31"]
+[ext_resource type="Texture2D" uid="uid://nryws45yxn52" path="res://Scenes/MainMenu/Assets/Image/CategoryIcons/Knowledge.png" id="10_ah1a3"]
+[ext_resource type="Texture2D" uid="uid://btni6ngn1oi3o" path="res://Scenes/MainMenu/Assets/Image/CategoryIcons/Patch.png" id="11_ah1a3"]
+
+[sub_resource type="Gradient" id="Gradient_lic31"]
+colors = PackedColorArray(0.21833304, 0.25114214, 0.3292721, 1, 0.10142916, 0.11426883, 0.12726092, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fv0xt"]
+gradient = SubResource("Gradient_lic31")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0.48011363, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83fg3"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
 bg_color = Color(0.2810804, 0.048797384, 0.043072954, 1)
+draw_center = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ichqs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ql118"]
+bg_color = Color(0.06932917, 0.05950237, 0.039972857, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhq4s"]
+draw_center = false
+shadow_size = 2
+
+[sub_resource type="Gradient" id="Gradient_56wdt"]
+colors = PackedColorArray(0.16935879, 0.14849067, 0.11373479, 1, 0.044944562, 0.035664678, 0.022647085, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_irfkg"]
+gradient = SubResource("Gradient_56wdt")
+fill_from = Vector2(0.5369318, 0)
+fill_to = Vector2(0.7073864, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ichqs"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
 bg_color = Color(0.5154536, 0.11781099, 0.1111171, 1)
+draw_center = false
+shadow_size = 3
+
+[sub_resource type="Gradient" id="Gradient_fv0xt"]
+colors = PackedColorArray(0.6039216, 0.039215688, 0.02745098, 0.9411765, 0.8666667, 0.07058824, 0.17254902, 0.6666667)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qm0se"]
+gradient = SubResource("Gradient_fv0xt")
+
+[sub_resource type="Gradient" id="Gradient_sng02"]
+colors = PackedColorArray(0.67822737, 0.08916452, 0.0844981, 1, 0.5079168, 0.048782274, 0.045489796, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w4wer"]
+gradient = SubResource("Gradient_sng02")
+fill_from = Vector2(1, 0.36079547)
+fill_to = Vector2(0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcdtc"]
-bg_color = Color(0.45711088, 0.45711094, 0.45711076, 1)
+bg_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nl4gn"]
-bg_color = Color(0.41598046, 0.41598043, 0.4159804, 1)
+bg_color = Color(0.05486104, 0.054860987, 0.054861017, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cdkru"]
-bg_color = Color(0.5198213, 0.5198213, 0.5198212, 1)
+bg_color = Color(0.10747979, 0.107479714, 0.10747977, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7oo3"]
-bg_color = Color(0.45711088, 0.45711094, 0.45711076, 1)
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_lic31"]
+color = Color(0.41636172, 0, 0.0117987245, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sg7ab"]
-bg_color = Color(0.41598046, 0.41598043, 0.4159804, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lic31"]
+bg_color = Color(0.20871031, 0.20871007, 0.2087102, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpx3y"]
-bg_color = Color(0.5198213, 0.5198213, 0.5198212, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56wdt"]
+bg_color = Color(0.17522371, 0.17522374, 0.17522365, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k2pwb"]
+bg_color = Color(0.2327216, 0.23272163, 0.2327216, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6u82b"]
 content_margin_left = 5.0
@@ -65,6 +111,101 @@ content_margin_right = 5.0
 content_margin_bottom = 3.0
 bg_color = Color(0.4950596, 0.51012367, 0.8567815, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvstq"]
+bg_color = Color(0.2047984, 0.33340177, 0.51472336, 1)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fv0xt"]
+bg_color = Color(0.17287225, 0.28887317, 0.45050472, 1)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sng02"]
+bg_color = Color(0.23341662, 0.3741306, 0.5703778, 1)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tkchk"]
+bg_color = Color(0.13485593, 0.1616984, 0.16949382, 1)
+draw_center = false
+shadow_size = 2
+
+[sub_resource type="Gradient" id="Gradient_0hjx5"]
+colors = PackedColorArray(0.12333044, 0.15623945, 0.22068235, 1, 0.041521996, 0.06100569, 0.095653646, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vcdtc"]
+gradient = SubResource("Gradient_0hjx5")
+fill_from = Vector2(0.42897728, 1)
+fill_to = Vector2(0, 0.014204546)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gs15"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ooh61"]
+bg_color = Color(0.16398942, 0.16586134, 0.16871297, 1)
+skew = Vector2(0.3, 0)
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.29586652, 0.2958665, 0.29586646, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wh65k"]
+bg_color = Color(0.14132038, 0.14132038, 0.14483917, 1)
+skew = Vector2(0.3, 0)
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color(0.19434926, 0.19434929, 0.19434911, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ah1a3"]
+bg_color = Color(0.11211429, 0.1121142, 0.115469314, 1)
+skew = Vector2(0.3, 0)
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color(0.19434926, 0.19434929, 0.19434911, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkjg1"]
+bg_color = Color(0.1843363, 0.18433645, 0.18908152, 1)
+skew = Vector2(0.3, 0)
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color(0.19434926, 0.19434929, 0.19434911, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ee4eu"]
+bg_color = Color(0.14132038, 0.14132038, 0.14483917, 1)
+skew = Vector2(0.3, 0)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.19434926, 0.19434929, 0.19434911, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txptg"]
+bg_color = Color(0.11211429, 0.1121142, 0.115469314, 1)
+skew = Vector2(0.3, 0)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.19434926, 0.19434929, 0.19434911, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmo68"]
+bg_color = Color(0.1843363, 0.18433645, 0.18908152, 1)
+skew = Vector2(0.3, 0)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.19434926, 0.19434929, 0.19434911, 1)
+border_blend = true
+
+[sub_resource type="Gradient" id="Gradient_ua038"]
+colors = PackedColorArray(0.026738942, 0.56199735, 0.7815773, 0.15686275, 0.050962053, 0.6695336, 0.46925783, 0.15686275)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6u82b"]
+gradient = SubResource("Gradient_ua038")
+fill_from = Vector2(0.34375, 0.74715906)
+fill_to = Vector2(0.92329544, 0)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w4wer"]
 content_margin_left = 6.0
 content_margin_top = 6.0
@@ -74,14 +215,6 @@ bg_color = Color(0.38885453, 0.38273814, 0.39525816, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_83fg3"]
 color = Color(1, 1, 1, 1)
-
-[sub_resource type="Gradient" id="Gradient_ua038"]
-colors = PackedColorArray(0.026738942, 0.56199735, 0.7815773, 0.15686275, 0.050962053, 0.6695336, 0.46925783, 0.15686275)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_6u82b"]
-gradient = SubResource("Gradient_ua038")
-fill_from = Vector2(0.34375, 0.74715906)
-fill_to = Vector2(0.92329544, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ygr85"]
 draw_center = false
@@ -117,7 +250,7 @@ shadow_size = 1
 bg_color = Color(0.21470651, 0.5485646, 0.08006107, 1)
 shadow_size = 1
 
-[node name="Control" type="Control" unique_id=1861006175 node_paths=PackedStringArray("_lobbyMenu", "_queuePanel", "_matchFoundPanel", "_screenClickBlocker")]
+[node name="MainMenu" type="Control" unique_id=1861006175 node_paths=PackedStringArray("_lobbyMenu", "_queuePanel", "_matchFoundPanel", "_screenClickBlocker")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -125,11 +258,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_c7oo3")
-_lobbyMenu = NodePath("Content/LobbyMenu")
-_queuePanel = NodePath("Content/QueuePanel")
+_lobbyMenu = NodePath("Content/FreeSpace/Content/LobbyMenu")
+_queuePanel = NodePath("Content/FreeSpace/Content/QueuePanel")
 _matchFoundPanel = NodePath("Content/MatchFoundPanel")
 _screenClickBlocker = NodePath("Content/MouseStopper")
 QueueCheckCooldown = 5.0
+
+[node name="bg" type="TextureRect" parent="." unique_id=1219672652]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_fv0xt")
 
 [node name="Content" type="PanelContainer" parent="." unique_id=1484054045]
 layout_mode = 1
@@ -140,102 +282,222 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_83fg3")
 
-[node name="LobbyMenu" type="PanelContainer" parent="Content" unique_id=1211135292 node_paths=PackedStringArray("_currentModeLabel", "_soloModeButton", "_trioModeButton", "_fullModeButton", "_findMatchButton")]
-custom_minimum_size = Vector2(450, 300)
+[node name="FreeSpace" type="PanelContainer" parent="Content" unique_id=1812348090]
 layout_mode = 2
-size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ichqs")
+
+[node name="Content" type="MarginContainer" parent="Content/FreeSpace" unique_id=694928973]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 75
+
+[node name="BoxedContent" type="VBoxContainer" parent="Content/FreeSpace/Content" unique_id=648123870]
+layout_mode = 2
+
+[node name="Top" type="HBoxContainer" parent="Content/FreeSpace/Content/BoxedContent" unique_id=820585727]
+layout_mode = 2
+
+[node name="InfoPanel" type="PanelContainer" parent="Content/FreeSpace/Content/BoxedContent/Top" unique_id=1138936295]
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ql118")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/FreeSpace/Content/BoxedContent/Top/InfoPanel" unique_id=2136398468]
+layout_mode = 2
+
+[node name="Header" type="PanelContainer" parent="Content/FreeSpace/Content/BoxedContent/Top/InfoPanel/VBoxContainer" unique_id=250696555]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vhq4s")
+
+[node name="bg" type="TextureRect" parent="Content/FreeSpace/Content/BoxedContent/Top/InfoPanel/VBoxContainer/Header" unique_id=884689905]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_irfkg")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Content/FreeSpace/Content/BoxedContent/Top/InfoPanel/VBoxContainer/Header/bg" unique_id=1724315003]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.5
+offset_top = -11.5
+offset_right = 71.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9040047, 0.8803495, 0.7957209, 1)
+theme_override_fonts/font = ExtResource("6_sng02")
+theme_override_font_sizes/font_size = 14
+text = "DO YOU KNOW IT?"
+
+[node name="Bordfers" type="MarginContainer" parent="Content/FreeSpace/Content/BoxedContent/Top/InfoPanel/VBoxContainer" unique_id=173444394]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Fact" type="Label" parent="Content/FreeSpace/Content/BoxedContent/Top/InfoPanel/VBoxContainer/Bordfers" unique_id=1018478636]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.8082649, 0.78767294, 0.7287499, 1)
+theme_override_font_sizes/font_size = 13
+text = "Родоначальником жанра MOBA была не кастомка Defense of the Ancients для Warcraft III, а карта Aeon of Strife, созданная еще в 1998 году для StarCraft."
+autowrap_mode = 2
+
+[node name="Middle" type="HBoxContainer" parent="Content/FreeSpace/Content/BoxedContent" unique_id=1257564271]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+
+[node name="LobbyMenu" type="PanelContainer" parent="Content/FreeSpace/Content" unique_id=1211135292 node_paths=PackedStringArray("_currentModeLabel", "_soloModeButton", "_trioModeButton", "_fullModeButton", "_findMatchButton")]
+visible = false
+custom_minimum_size = Vector2(650, 450)
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_ichqs")
 script = ExtResource("2_sg7ab")
-_currentModeLabel = NodePath("Content/Selected/SelectedGameMode2")
-_soloModeButton = NodePath("Content/Modes/Solo")
-_trioModeButton = NodePath("Content/Modes/Trio")
-_fullModeButton = NodePath("Content/Modes/Full")
-_findMatchButton = NodePath("Content/FindLobby")
+_currentModeLabel = NodePath("Borders/Content/Modes/Selected/SelectedGameMode2")
+_soloModeButton = NodePath("Borders/Content/Modes/Options/Solo")
+_trioModeButton = NodePath("Borders/Content/Modes/Options/Trio")
+_fullModeButton = NodePath("Borders/Content/Modes/Options/Full")
+_findMatchButton = NodePath("Borders/Content/FindLobby")
 
-[node name="Content" type="VBoxContainer" parent="Content/LobbyMenu" unique_id=496431377]
+[node name="bg" type="TextureRect" parent="Content/FreeSpace/Content/LobbyMenu" unique_id=629048872]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_qm0se")
+
+[node name="Header" type="HBoxContainer" parent="Content/FreeSpace/Content/LobbyMenu" unique_id=58314118]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="bg" type="TextureRect" parent="Content/FreeSpace/Content/LobbyMenu/Header" unique_id=1729161669]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture = SubResource("GradientTexture2D_w4wer")
+expand_mode = 1
+
+[node name="Title" type="Label" parent="Content/FreeSpace/Content/LobbyMenu/Header/bg" unique_id=1101294657]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -16.0
+offset_right = 81.0
+offset_bottom = 16.0
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.93333334, 0.92941177, 0.9411765, 1)
+theme_override_fonts/font = ExtResource("7_0hjx5")
+theme_override_font_sizes/font_size = 25
+text = "SELECT MATCH PROPERTY"
+
+[node name="Borders" type="MarginContainer" parent="Content/FreeSpace/Content/LobbyMenu" unique_id=1150386784]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 70
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Content" type="VBoxContainer" parent="Content/FreeSpace/Content/LobbyMenu/Borders" unique_id=496431377]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="Header" type="HBoxContainer" parent="Content/LobbyMenu/Content" unique_id=58314118]
+[node name="Modes" type="VBoxContainer" parent="Content/FreeSpace/Content/LobbyMenu/Borders/Content" unique_id=1321467953]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PlayerCount" type="Label" parent="Content/FreeSpace/Content/LobbyMenu/Borders/Content/Modes" unique_id=1330104052]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.93333334, 0.92941177, 0.9411765, 1)
+theme_override_fonts/font = ExtResource("7_0hjx5")
+theme_override_font_sizes/font_size = 21
+text = " PLAYERS COUNT"
 
-[node name="Title" type="Label" parent="Content/LobbyMenu/Content/Header" unique_id=1101294657]
+[node name="Options" type="HBoxContainer" parent="Content/FreeSpace/Content/LobbyMenu/Borders/Content/Modes" unique_id=160970212]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.69693524, 0.6990257, 0.6339283, 1)
-theme_override_font_sizes/font_size = 23
-text = "MATCH"
+theme_override_constants/separation = 15
 
-[node name="Modes" type="HBoxContainer" parent="Content/LobbyMenu/Content" unique_id=1472977072]
-layout_mode = 2
-
-[node name="Solo" type="Button" parent="Content/LobbyMenu/Content/Modes" unique_id=1123616271]
-custom_minimum_size = Vector2(80, 30)
+[node name="Solo" type="Button" parent="Content/FreeSpace/Content/LobbyMenu/Borders/Content/Modes/Options" unique_id=1123616271]
+custom_minimum_size = Vector2(180, 30)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0.7186715, 0.9333708, 0.9882814, 1)
+theme_override_colors/font_color = Color(0.93333334, 0.92941177, 0.9411765, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_vcdtc")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nl4gn")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cdkru")
 text = "1 v 1"
 
-[node name="Trio" type="Button" parent="Content/LobbyMenu/Content/Modes" unique_id=1108801711]
-custom_minimum_size = Vector2(80, 30)
+[node name="Trio" type="Button" parent="Content/FreeSpace/Content/LobbyMenu/Borders/Content/Modes/Options" unique_id=1108801711]
+custom_minimum_size = Vector2(180, 30)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0.7186715, 0.9333708, 0.9882814, 1)
+theme_override_colors/font_color = Color(0.93333334, 0.92941177, 0.9411765, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_vcdtc")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nl4gn")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cdkru")
 text = "3 v 3"
 
-[node name="Full" type="Button" parent="Content/LobbyMenu/Content/Modes" unique_id=608813247]
-custom_minimum_size = Vector2(80, 30)
+[node name="Full" type="Button" parent="Content/FreeSpace/Content/LobbyMenu/Borders/Content/Modes/Options" unique_id=608813247]
+custom_minimum_size = Vector2(180, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0.7186715, 0.9333708, 0.9882814, 1)
+theme_override_colors/font_color = Color(0.93333334, 0.92941177, 0.9411765, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_vcdtc")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nl4gn")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cdkru")
 text = "5 v 5"
 
-[node name="HSeparator" type="HSeparator" parent="Content/LobbyMenu/Content" unique_id=605543337]
+[node name="Selected" type="HBoxContainer" parent="Content/FreeSpace/Content/LobbyMenu/Borders/Content/Modes" unique_id=118476630]
 layout_mode = 2
+size_flags_horizontal = 0
 
-[node name="Selected" type="HBoxContainer" parent="Content/LobbyMenu/Content" unique_id=118476630]
+[node name="Title" type="Label" parent="Content/FreeSpace/Content/LobbyMenu/Borders/Content/Modes/Selected" unique_id=1773618179]
 layout_mode = 2
-
-[node name="Title" type="Label" parent="Content/LobbyMenu/Content/Selected" unique_id=1773618179]
-layout_mode = 2
+theme_override_colors/font_color = Color(0.93333334, 0.92941177, 0.9411765, 1)
+theme_override_fonts/font = ExtResource("6_8qovt")
 theme_override_font_sizes/font_size = 18
-text = "Selected mode:"
+text = "SELECTED MODE "
 
-[node name="SelectedGameMode2" type="Label" parent="Content/LobbyMenu/Content/Selected" unique_id=539294831]
+[node name="SelectedGameMode2" type="Label" parent="Content/FreeSpace/Content/LobbyMenu/Borders/Content/Modes/Selected" unique_id=539294831]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.48171192, 0.6057175, 0.91058165, 1)
+theme_override_colors/font_color = Color(0.27782556, 0.5493556, 0.92659754, 1)
+theme_override_fonts/font = ExtResource("7_0hjx5")
 theme_override_font_sizes/font_size = 18
-text = "none"
+text = "NONE"
 
-[node name="FindLobby" type="Button" parent="Content/LobbyMenu/Content" unique_id=742395057]
+[node name="HSeparator" type="HSeparator" parent="Content/FreeSpace/Content/LobbyMenu/Borders/Content" unique_id=605543337]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_lic31")
+
+[node name="FindLobby" type="Button" parent="Content/FreeSpace/Content/LobbyMenu/Borders/Content" unique_id=742395057]
 custom_minimum_size = Vector2(160, 40)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("7_0hjx5")
 theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_c7oo3")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_sg7ab")
-theme_override_styles/hover = SubResource("StyleBoxFlat_kpx3y")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lic31")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_56wdt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_k2pwb")
 text = "Find lobby"
 
-[node name="QueuePanel" type="PanelContainer" parent="Content" unique_id=787522137 node_paths=PackedStringArray("_timeLabel", "_leaveQueue")]
+[node name="QueuePanel" type="PanelContainer" parent="Content/FreeSpace/Content" unique_id=787522137 node_paths=PackedStringArray("_timeLabel", "_leaveQueue")]
 visible = false
 custom_minimum_size = Vector2(250, 70)
 layout_mode = 2
@@ -246,20 +508,20 @@ script = ExtResource("3_sg7ab")
 _timeLabel = NodePath("VBoxContainer/Text/Time")
 _leaveQueue = NodePath("VBoxContainer/LeaveQueue")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Content/QueuePanel" unique_id=658237361]
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/FreeSpace/Content/QueuePanel" unique_id=658237361]
 layout_mode = 2
 
-[node name="Text" type="HBoxContainer" parent="Content/QueuePanel/VBoxContainer" unique_id=2011857144]
+[node name="Text" type="HBoxContainer" parent="Content/FreeSpace/Content/QueuePanel/VBoxContainer" unique_id=2011857144]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Title" type="Label" parent="Content/QueuePanel/VBoxContainer/Text" unique_id=1241563626]
+[node name="Title" type="Label" parent="Content/FreeSpace/Content/QueuePanel/VBoxContainer/Text" unique_id=1241563626]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
 text = "TIME IN QUEUE:"
 
-[node name="Time" type="Label" parent="Content/QueuePanel/VBoxContainer/Text" unique_id=412710604]
+[node name="Time" type="Label" parent="Content/FreeSpace/Content/QueuePanel/VBoxContainer/Text" unique_id=412710604]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -267,7 +529,7 @@ theme_override_colors/font_color = Color(0.43822256, 0.63765556, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "0s"
 
-[node name="LeaveQueue" type="Button" parent="Content/QueuePanel/VBoxContainer" unique_id=1338031519]
+[node name="LeaveQueue" type="Button" parent="Content/FreeSpace/Content/QueuePanel/VBoxContainer" unique_id=1338031519]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -276,7 +538,235 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ua038")
 theme_override_styles/hover = SubResource("StyleBoxFlat_vapy7")
 text = "Left Queue"
 
+[node name="BottopPanel" type="VBoxContainer" parent="Content" unique_id=126225258 node_paths=PackedStringArray("_matchmakeButton", "_lobbyPanel")]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+alignment = 2
+script = ExtResource("5_fv0xt")
+_matchmakeButton = NodePath("FindGame")
+_lobbyPanel = NodePath("../FreeSpace/Content/LobbyMenu")
+
+[node name="FindGame" type="Button" parent="Content/BottopPanel" unique_id=1329133629]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("6_8qovt")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_rvstq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fv0xt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sng02")
+text = "FIND GAME"
+
+[node name="Bottom" type="PanelContainer" parent="Content/BottopPanel" unique_id=972879851]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_tkchk")
+
+[node name="bg" type="TextureRect" parent="Content/BottopPanel/Bottom" unique_id=1098544326]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_vcdtc")
+expand_mode = 1
+
+[node name="TopPanel" type="PanelContainer" parent="Content" unique_id=806979667]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1gs15")
+
+[node name="Content" type="HBoxContainer" parent="Content/TopPanel" unique_id=1590011134]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Profile" type="PanelContainer" parent="Content/TopPanel/Content" unique_id=1789128094]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ooh61")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/TopPanel/Content/Profile" unique_id=1926699380]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="Nickname" type="Label" parent="Content/TopPanel/Content/Profile/VBoxContainer" unique_id=1129276192]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.8503372, 0.8503371, 0.8503371, 1)
+theme_override_fonts/font = ExtResource("7_0hjx5")
+theme_override_font_sizes/font_size = 12
+text = "Nickname"
+
+[node name="MmrBlock" type="HBoxContainer" parent="Content/TopPanel/Content/Profile/VBoxContainer" unique_id=168011359]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Content/TopPanel/Content/Profile/VBoxContainer/MmrBlock" unique_id=690156801]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.70935345, 0.70935386, 0.7093535, 1)
+theme_override_fonts/font = ExtResource("7_0hjx5")
+theme_override_font_sizes/font_size = 10
+text = "MMR: "
+
+[node name="MMR2" type="Label" parent="Content/TopPanel/Content/Profile/VBoxContainer/MmrBlock" unique_id=336536372]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.89059, 0.89059, 0.89058983, 1)
+theme_override_fonts/font = ExtResource("7_0hjx5")
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="Heroes" type="Button" parent="Content/TopPanel/Content" unique_id=274070876]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7722627, 0.7944612, 0.840866, 1)
+theme_override_fonts/font = ExtResource("7_0hjx5")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_wh65k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ah1a3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gkjg1")
+text = "HEROES"
+
+[node name="Borders" type="MarginContainer" parent="Content/TopPanel/Content/Heroes" unique_id=562139047]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_right = 5
+
+[node name="Icon" type="TextureRect" parent="Content/TopPanel/Content/Heroes/Borders" unique_id=2336975]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("8_k2pwb")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Ladder" type="Button" parent="Content/TopPanel/Content" unique_id=1769152727]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7722627, 0.7944612, 0.840866, 1)
+theme_override_fonts/font = ExtResource("7_0hjx5")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_wh65k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ah1a3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gkjg1")
+text = "LADDER"
+
+[node name="Borders" type="MarginContainer" parent="Content/TopPanel/Content/Ladder" unique_id=1194845654]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Icon" type="TextureRect" parent="Content/TopPanel/Content/Ladder/Borders" unique_id=1592219328]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("8_lic31")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Knowladge" type="Button" parent="Content/TopPanel/Content" unique_id=592031388]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7722627, 0.7944612, 0.840866, 1)
+theme_override_fonts/font = ExtResource("7_0hjx5")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_wh65k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ah1a3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gkjg1")
+text = "KNOWLEDGE ROOM"
+
+[node name="Borders" type="MarginContainer" parent="Content/TopPanel/Content/Knowladge" unique_id=341056653]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_right = 5
+
+[node name="Icon" type="TextureRect" parent="Content/TopPanel/Content/Knowladge/Borders" unique_id=400256864]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("10_ah1a3")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Patch" type="Button" parent="Content/TopPanel/Content" unique_id=511417074]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.7722627, 0.7944612, 0.840866, 1)
+theme_override_fonts/font = ExtResource("7_0hjx5")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_wh65k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ah1a3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gkjg1")
+text = "PATCH INFO"
+
+[node name="Borders" type="MarginContainer" parent="Content/TopPanel/Content/Patch" unique_id=1000804859]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_right = 5
+
+[node name="Icon" type="TextureRect" parent="Content/TopPanel/Content/Patch/Borders" unique_id=1160294085]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("11_ah1a3")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Settings" type="Button" parent="Content/TopPanel/Content" unique_id=1458005924]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.7722627, 0.7944612, 0.840866, 1)
+theme_override_fonts/font = ExtResource("7_0hjx5")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_ee4eu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_txptg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cmo68")
+
+[node name="MouseStopper" type="Control" parent="Content" unique_id=377084035]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Content/MouseStopper" unique_id=1297954118]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_6u82b")
+
 [node name="DebugPanel" type="PanelContainer" parent="Content" unique_id=1461235791 node_paths=PackedStringArray("_main", "_isWorkLabel", "_pickCountLabel", "_basicPingTime", "_currentPingTime")]
+visible = false
 custom_minimum_size = Vector2(250, 250)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -358,19 +848,6 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.27442724, 0.60906094, 0.980009, 1)
 text = "0.0"
 
-[node name="MouseStopper" type="Control" parent="Content" unique_id=377084035]
-visible = false
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Content/MouseStopper" unique_id=1297954118]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_6u82b")
-
 [node name="MatchFoundPanel" type="PanelContainer" parent="Content" unique_id=723971469 node_paths=PackedStringArray("_confirmGameButton")]
 visible = false
 custom_minimum_size = Vector2(550, 180)
@@ -412,3 +889,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_pdr62")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8qovt")
 theme_override_styles/hover = SubResource("StyleBoxFlat_0hjx5")
 text = "ACCEPT"
+
+[node name="ColorPalette" type="Sprite2D" parent="." unique_id=1258398462]
+position = Vector2(-211, 215)
+texture = ExtResource("6_vapy7")

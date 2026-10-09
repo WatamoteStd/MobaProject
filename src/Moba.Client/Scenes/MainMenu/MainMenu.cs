@@ -9,6 +9,7 @@ public partial class MainMenu : Control
 	public enum UserAction : byte { Idle, SearchGame, AcceptingGame};
 	public UserAction CurrentAction = UserAction.Idle;
 
+	
 	[Export] private LobbyMenu _lobbyMenu;
 	[Export] private QueuePanel _queuePanel;
 	[Export] private MatchFoundPanel _matchFoundPanel;
