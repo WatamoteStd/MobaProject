@@ -4,6 +4,7 @@ using Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Moba.Shared.MasterServerDto;
 using Moba.Shared.MasterServerDto.Nickname;
 
 namespace Controllers;
@@ -74,7 +75,7 @@ public class NicknameController : ControllerBase
             return NotFound("User not found");
         }
 
-        return Ok(user.Nickname);
+        return Ok(new NicknameGetResponseDto(user.Nickname, user.Id));
 
     }
 

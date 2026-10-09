@@ -41,7 +41,7 @@ public class ProcessWorker
                 if (_portManager.TryGetPort(out ushort port))
                 {
                     Console.WriteLine($"[Worker] Got port {port} for Match {matchInfo.MatchId}. Starting server process...");
-                    StartServer(port, matchInfo.MatchId, matchInfo.GameMode);
+                    StartServer(port, matchInfo.MatchId, matchInfo.GameMode, matchInfo);
 
                     Console.WriteLine($"[Worker] Get packet from matchmaker.");
                     for(int i = 0; i < matchInfo.PlayerIds.Length; i++)
@@ -73,7 +73,7 @@ public class ProcessWorker
 
     }
 
-    private void StartServer(ushort port, Guid matchId, MatchProperty mode)
+    private void StartServer(ushort port, Guid matchId, MatchProperty mode, MatchCreateInfo matchInfo)
     {
         
         ProcessStartInfo info = new ProcessStartInfo();
@@ -87,7 +87,7 @@ public class ProcessWorker
             _ => 0
         };
 
-        info.Arguments = $"--port {port} --match {matchId} --players {playersCount}";
+        info.Arguments = $"--port {port} --match {matchId} --players {playersCount} --playersIds {string.Join(',', matchInfo.PlayerIds)}";
         info.UseShellExecute = true; // create another cmd window
         info.CreateNoWindow = false; // false for debug window or true for prod mode
         info.WorkingDirectory = Path.GetDirectoryName(serverExePath);

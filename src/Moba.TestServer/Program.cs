@@ -12,6 +12,8 @@ int port = 5000;
 Guid matchId = Guid.Empty;
 int playersCount = 0;
 
+HashSet<long> allowedPlayers = new HashSet<long>();
+
 for (int i = 0; i < args.Length; i++)
 {
     
@@ -38,6 +40,21 @@ for (int i = 0; i < args.Length; i++)
         {
             playersCount = count;
         }
+    }
+    else if (args[i] == "--playersIds" && i + 1 < args.Length)
+    {
+        
+        var allIds = args[i + 1];
+        string[] splitedIds = allIds.Split(',');
+
+        for(int j = 0; j < splitedIds.Length; j++)
+        {
+            if(long.TryParse(splitedIds[j], out var pId))
+            {
+                allowedPlayers.Add(pId);
+            }
+        }
+
     }
 
 }

@@ -74,7 +74,7 @@ bg_color = Color(0.2327216, 0.23272163, 0.2327216, 1)
 content_margin_left = 5.0
 content_margin_top = 5.0
 content_margin_right = 5.0
-bg_color = Color(0.56453633, 0.13314044, 0.125747, 1)
+bg_color = Color(0.6779197, 0, 0.053737953, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qm0se"]
 content_margin_left = 5.0
@@ -298,6 +298,7 @@ layout_mode = 2
 
 [node name="InfoPanel" parent="Content/FreeSpace/Content/BoxedContent/Top" unique_id=1508581257 instance=ExtResource("2_gkjg1")]
 layout_mode = 2
+_timeBeforeNewFact = 10.0
 
 [node name="Middle" type="HBoxContainer" parent="Content/FreeSpace/Content/BoxedContent" unique_id=1257564271]
 layout_mode = 2
@@ -464,10 +465,12 @@ layout_mode = 2
 [node name="Text" type="HBoxContainer" parent="Content/FreeSpace/Content/QueuePanel/VBoxContainer" unique_id=2011857144]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 6
 
 [node name="Title" type="Label" parent="Content/FreeSpace/Content/QueuePanel/VBoxContainer/Text" unique_id=1241563626]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("7_0hjx5")
 theme_override_font_sizes/font_size = 16
 text = "TIME IN QUEUE:"
 
@@ -476,10 +479,12 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.43822256, 0.63765556, 1, 1)
+theme_override_fonts/font = ExtResource("6_8qovt")
 theme_override_font_sizes/font_size = 18
 text = "0s"
 
 [node name="LeaveQueue" type="Button" parent="Content/FreeSpace/Content/QueuePanel/VBoxContainer" unique_id=1338031519]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

@@ -23,7 +23,6 @@ public class FactsController : ControllerBase
     {
         
         var fact = _factService.GetRandomFact();
-        Console.WriteLine($"[FactService] Returning fact: Title='{fact.Title}', Text='{fact.Text}'");
         return Ok(fact);
 
     }

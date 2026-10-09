@@ -6,6 +6,7 @@ public partial class GameSession : Node
 {
 	
 	public static GameSession Instance {get; private set;}
+	public long UserId {get; private set;}
 	public Guid MatchId {get; private set;}
 	public string MatchIp {get; private set;}
 	public int MatchPort {get; private set;}
@@ -31,6 +32,12 @@ public partial class GameSession : Node
 		GD.Print($"[Game Session] MatchId:{MatchId}");
 		GD.Print($"[Game Session] IP:{MatchIp}");
 		GD.Print($"[Game Session] Port:{MatchPort}");
+
+	}
+	public void UpdateUserId(long id)
+	{
+		
+		UserId = id;
 
 	}
 

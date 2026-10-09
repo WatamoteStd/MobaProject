@@ -138,7 +138,7 @@ public partial class HttpManager : Node
 
 	}
 
-	public async Task<QueuePlayerStatusResponse> QueuePingAsync()
+	public async Task<QueuePlayerStatusResponse> QueuePingAsync() 
 	{
 		try
 		{
@@ -186,7 +186,7 @@ public partial class HttpManager : Node
 
 	}
 
-	public async Task<string> GetNicknameAsync()
+	public async Task<string> GetNicknameAsync() // also return id for GameSession
 	{
 		
 		try
@@ -194,11 +194,13 @@ public partial class HttpManager : Node
 			
 			var response = await _client.GetAsync("api/Nickname/get");
 
-			var content = await response.Content.ReadAsStringAsync();
 
 			if(response.IsSuccessStatusCode)
 			{
-				return content;
+				var content = await response.Content.ReadFromJsonAsync<NicknameGetResponseDto>();
+				GameSession.Instance.UpdateUserId(content.userId);
+				GD.Print($"[NICKNAME GET] USER ID CLAIMED:{content.userId}");
+				return content.nickname;
 			}
 
 			return "Unkown";
