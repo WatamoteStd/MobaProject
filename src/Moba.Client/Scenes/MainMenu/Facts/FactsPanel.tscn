@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://b28wfqc08t5ie"]
+
+[ext_resource type="FontFile" uid="uid://vee20gmf4um3" path="res://Assets/Fonts/Cinzel/Cinzel-SemiBold.ttf" id="1_b44ha"]
+[ext_resource type="Script" uid="uid://bc7wmauigvsm3" path="res://Scenes/MainMenu/Facts/FactsPanel.cs" id="1_bvfu6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ql118"]
+bg_color = Color(0.06932917, 0.05950237, 0.039972857, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhq4s"]
+draw_center = false
+shadow_size = 2
+
+[sub_resource type="Gradient" id="Gradient_56wdt"]
+colors = PackedColorArray(0.16935879, 0.14849067, 0.11373479, 1, 0.044944562, 0.035664678, 0.022647085, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_irfkg"]
+gradient = SubResource("Gradient_56wdt")
+fill_from = Vector2(0.5369318, 0)
+fill_to = Vector2(0.7073864, 1)
+
+[node name="InfoPanel" type="PanelContainer" unique_id=1508581257 node_paths=PackedStringArray("_content", "_header")]
+custom_minimum_size = Vector2(320, 180)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ql118")
+script = ExtResource("1_bvfu6")
+_content = NodePath("VBoxContainer/Bordfers/Fact")
+_header = NodePath("VBoxContainer/Header/bg/Label")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=394918608]
+layout_mode = 2
+
+[node name="Header" type="PanelContainer" parent="VBoxContainer" unique_id=348009868]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vhq4s")
+
+[node name="bg" type="TextureRect" parent="VBoxContainer/Header" unique_id=551357776]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_irfkg")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/Header/bg" unique_id=1444659560]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.5
+offset_top = -11.5
+offset_right = 71.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9040047, 0.8803495, 0.7957209, 1)
+theme_override_fonts/font = ExtResource("1_b44ha")
+theme_override_font_sizes/font_size = 14
+text = "DO YOU KNOW IT?"
+
+[node name="Bordfers" type="MarginContainer" parent="VBoxContainer" unique_id=1945760835]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Fact" type="Label" parent="VBoxContainer/Bordfers" unique_id=1795206565]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.8082649, 0.78767294, 0.7287499, 1)
+theme_override_font_sizes/font_size = 13
+text = "No facts yet."
+autowrap_mode = 2

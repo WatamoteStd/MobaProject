@@ -8,6 +8,7 @@ using NATS.Client.Hosting;
 using Services.Matchmake;
 using Microsoft.Extensions.Options;
 using NATS.Client.Serializers.Json;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,8 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddHostedService<MatchReadyNatsListener>();
+
+builder.Services.AddSingleton<FactService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

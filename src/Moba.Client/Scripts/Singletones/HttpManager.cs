@@ -212,5 +212,32 @@ public partial class HttpManager : Node
 
 	}
 
+	public async Task<FactDto> GetFactAsync()
+	{
+		
+		try
+		{
+			
+			var result = await _client.GetAsync("api/Facts/random");
+
+			if(result.IsSuccessStatusCode)
+			{
+				
+				var content = await result.Content.ReadFromJsonAsync<FactDto>();
+				return content;
+
+			}
+
+			return new FactDto("DO YOU KNOW IT?", "Server ignored your request..");
+			
+
+		}
+		catch(Exception e)
+		{
+			return new FactDto("DO YOU KNOW ERROR?", $"I can't connect to the server. There is the message:{e.Message}");
+		}
+
+	}
+
 
 }

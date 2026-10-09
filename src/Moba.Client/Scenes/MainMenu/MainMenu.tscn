@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://oyideadbh36b"]
 
 [ext_resource type="Script" uid="uid://dv6utyccuutiu" path="res://Scenes/MainMenu/MainMenu.cs" id="1_c7oo3"]
+[ext_resource type="PackedScene" uid="uid://b28wfqc08t5ie" path="res://Scenes/MainMenu/Facts/FactsPanel.tscn" id="2_gkjg1"]
 [ext_resource type="Script" uid="uid://82t8433sj1ot" path="res://Scenes/MainMenu/LobbyMenu.cs" id="2_sg7ab"]
 [ext_resource type="Script" uid="uid://b7vtfs5fehskp" path="res://Scenes/MainMenu/QueuePanel.cs" id="3_sg7ab"]
 [ext_resource type="Script" uid="uid://30mi7qawt6a8" path="res://Scenes/MainMenu/DebugPanel.cs" id="4_kpx3y"]
 [ext_resource type="Script" uid="uid://bx1p62lu63qyb" path="res://Scenes/MainMenu/BottopPanel.cs" id="5_fv0xt"]
 [ext_resource type="Script" uid="uid://dg242kqw0bke0" path="res://Scenes/MainMenu/MatchFoundPanel.cs" id="5_ua038"]
 [ext_resource type="FontFile" uid="uid://w4eixgrru43i" path="res://Assets/Fonts/Cinzel/Cinzel-Medium.ttf" id="6_8qovt"]
-[ext_resource type="FontFile" uid="uid://vee20gmf4um3" path="res://Assets/Fonts/Cinzel/Cinzel-SemiBold.ttf" id="6_sng02"]
 [ext_resource type="Texture2D" uid="uid://d3rt15wrvej7i" path="res://Снимок.PNG" id="6_vapy7"]
 [ext_resource type="FontFile" uid="uid://djlxnh0uelnsn" path="res://Assets/Fonts/Cinzel/Cinzel-Bold.ttf" id="7_0hjx5"]
 [ext_resource type="PackedScene" uid="uid://b55ukttlp12ep" path="res://Scenes/MainMenu/ProfileWindow/ProfileScene.tscn" id="8_gkjg1"]
@@ -29,21 +29,6 @@ bg_color = Color(0.2810804, 0.048797384, 0.043072954, 1)
 draw_center = false
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ichqs"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ql118"]
-bg_color = Color(0.06932917, 0.05950237, 0.039972857, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhq4s"]
-draw_center = false
-shadow_size = 2
-
-[sub_resource type="Gradient" id="Gradient_56wdt"]
-colors = PackedColorArray(0.16935879, 0.14849067, 0.11373479, 1, 0.044944562, 0.035664678, 0.022647085, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_irfkg"]
-gradient = SubResource("Gradient_56wdt")
-fill_from = Vector2(0.5369318, 0)
-fill_to = Vector2(0.7073864, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ichqs"]
 bg_color = Color(0.5154536, 0.11781099, 0.1111171, 1)
@@ -311,55 +296,8 @@ layout_mode = 2
 [node name="Top" type="HBoxContainer" parent="Content/FreeSpace/Content/BoxedContent" unique_id=820585727]
 layout_mode = 2
 
-[node name="InfoPanel" type="PanelContainer" parent="Content/FreeSpace/Content/BoxedContent/Top" unique_id=1138936295]
-custom_minimum_size = Vector2(320, 180)
+[node name="InfoPanel" parent="Content/FreeSpace/Content/BoxedContent/Top" unique_id=1508581257 instance=ExtResource("2_gkjg1")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ql118")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Content/FreeSpace/Content/BoxedContent/Top/InfoPanel" unique_id=2136398468]
-layout_mode = 2
-
-[node name="Header" type="PanelContainer" parent="Content/FreeSpace/Content/BoxedContent/Top/InfoPanel/VBoxContainer" unique_id=250696555]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_vhq4s")
-
-[node name="bg" type="TextureRect" parent="Content/FreeSpace/Content/BoxedContent/Top/InfoPanel/VBoxContainer/Header" unique_id=884689905]
-layout_mode = 2
-texture = SubResource("GradientTexture2D_irfkg")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="Content/FreeSpace/Content/BoxedContent/Top/InfoPanel/VBoxContainer/Header/bg" unique_id=1724315003]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -71.5
-offset_top = -11.5
-offset_right = 71.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.9040047, 0.8803495, 0.7957209, 1)
-theme_override_fonts/font = ExtResource("6_sng02")
-theme_override_font_sizes/font_size = 14
-text = "DO YOU KNOW IT?"
-
-[node name="Bordfers" type="MarginContainer" parent="Content/FreeSpace/Content/BoxedContent/Top/InfoPanel/VBoxContainer" unique_id=173444394]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-
-[node name="Fact" type="Label" parent="Content/FreeSpace/Content/BoxedContent/Top/InfoPanel/VBoxContainer/Bordfers" unique_id=1018478636]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.8082649, 0.78767294, 0.7287499, 1)
-theme_override_font_sizes/font_size = 13
-text = "Родоначальником жанра MOBA была не кастомка Defense of the Ancients для Warcraft III, а карта Aeon of Strife, созданная еще в 1998 году для StarCraft."
-autowrap_mode = 2
 
 [node name="Middle" type="HBoxContainer" parent="Content/FreeSpace/Content/BoxedContent" unique_id=1257564271]
 layout_mode = 2
@@ -583,6 +521,7 @@ texture = SubResource("GradientTexture2D_vcdtc")
 expand_mode = 1
 
 [node name="ProfileWindow" parent="Content" unique_id=1764240686 node_paths=PackedStringArray("_openCloseButton", "_mainMenuNicknameLabel") instance=ExtResource("8_gkjg1")]
+visible = false
 layout_mode = 2
 _openCloseButton = NodePath("../TopPanel/Content/Profile/Button")
 _mainMenuNicknameLabel = NodePath("../TopPanel/Content/Profile/VBoxContainer/Nickname")
