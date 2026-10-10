@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dlgcv3i5cfcqa"]
+
+[ext_resource type="Texture2D" uid="uid://cyeofhhqhc7in" path="res://Scenes/MainMenu/MatchFoundElements/PlayerIcon.png" id="1_nds2d"]
+[ext_resource type="Script" uid="uid://b80g2bq77nuau" path="res://Scenes/MainMenu/MatchFoundElements/PlayerElement.cs" id="2_q5bim"]
+[ext_resource type="Texture2D" uid="uid://g7667cu3g2de" path="res://Scenes/MainMenu/MatchFoundElements/ActivePlayerIcon.png" id="3_5okc3"]
+
+[node name="Icon" type="TextureRect" unique_id=580138974]
+custom_minimum_size = Vector2(48, 48)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 4
+script = ExtResource("2_q5bim")
+_invactive = ExtResource("1_nds2d")
+_active = ExtResource("3_5okc3")

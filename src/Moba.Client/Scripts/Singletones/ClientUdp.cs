@@ -9,7 +9,7 @@ using System.Threading.Channels;
 
 public partial class ClientUdp : Node
 {
-	
+	public event Action<int, int> OnGameReadyPlayersUpdate; // total and ready
 	public static ClientUdp Instance {get; private set;}
 	private Socket _socket;
 	private Channel<NetworkPacket> _channel = Channel.CreateUnbounded<NetworkPacket>();
@@ -42,8 +42,6 @@ public partial class ClientUdp : Node
 		int bytesWriten = PacketTranslator.Write(PacketTypes.C2S_Handshake, buffer, ref packet);
 		_socket.Send(buffer[..bytesWriten]);
 
-		
-		GD.Print($"[ClientUdp] Handshake sent! Size: {bytesWriten} bytes.");
 
 	}
 
@@ -53,7 +51,7 @@ public partial class ClientUdp : Node
 		while(_channel.Reader.TryRead(out NetworkPacket packet)) 
 		{
 
-
+			bool isReturned = false;
 			try
 			{
 				
@@ -62,7 +60,28 @@ public partial class ClientUdp : Node
 				
 					case PacketTypes.S2C_HandshakeResponse:
 						{
-						
+							var pak = new S2C_HandshakeResponse();
+							PacketTranslator.Read(packet.Buffer[..packet.PayloadLength], ref pak);
+
+							GameSession.Instance.LocalPlayerId = pak.LocalPlayerId;
+							OnGameReadyPlayersUpdate?.Invoke(pak.TotalPlayersCount, pak.ActivePlayersCount);
+
+							GD.Print($"[ClientUDP] S2C_HandshakePacket received. PlayerId:{pak.LocalPlayerId}. TotalPlayers:{pak.TotalPlayersCount} Active:{pak.ActivePlayersCount}");
+
+							ArrayPool<byte>.Shared.Return(packet.Buffer);
+							isReturned = true;
+						}
+					break;
+
+					case PacketTypes.S2C_MatchReadyUpdate:
+						{
+							var pak = new S2C_MatchReadyUpdate();
+							PacketTranslator.Read(packet.Buffer[..packet.PayloadLength], ref pak);
+
+							OnGameReadyPlayersUpdate?.Invoke(pak.TotalPlayersCount, pak.ActivePlayersCount);
+
+							ArrayPool<byte>.Shared.Return(packet.Buffer);
+							isReturned = true;
 						}
 					break;
 
@@ -71,7 +90,10 @@ public partial class ClientUdp : Node
 			}
 			finally
 			{
-				ArrayPool<byte>.Shared.Return(packet.Buffer);
+				if(!isReturned)
+				{
+					ArrayPool<byte>.Shared.Return(packet.Buffer);
+				}
 			}
 
 			

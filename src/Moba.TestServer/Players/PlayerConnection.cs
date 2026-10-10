@@ -6,7 +6,7 @@ namespace Players;
 public struct PlayerConnection
 {
     
-    public int Id;
+    public ushort Id;
     public bool IsConnected;
     public EndPoint EndPoint;
     public string Nickname;

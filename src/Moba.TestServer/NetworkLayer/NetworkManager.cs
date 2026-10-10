@@ -43,4 +43,9 @@ public class NetworkManager
 
     }
 
+    public Socket GetSocket()
+    {
+        return _socket;
+    }
+
 }

@@ -52,4 +52,29 @@ public static class PacketTranslator
         pck.Deserialize(buffer);
     }
 
+    public static int Write(PacketTypes type, Span<byte> buffer, ref S2C_HandshakeResponse pck)
+    {
+        BinaryPrimitives.WriteUInt16LittleEndian(buffer, (ushort) type);
+
+        int payloadSize = pck.Serialize(buffer[2..]);
+        return 2 + payloadSize;
+    }
+
+    public static void Read(ReadOnlySpan<byte> buffer, ref S2C_HandshakeResponse pck)
+    {
+        pck.Deserialize(buffer);
+    }
+    public static int Write(PacketTypes type, Span<byte> buffer, ref S2C_MatchReadyUpdate pck)
+    {
+        BinaryPrimitives.WriteUInt16LittleEndian(buffer, (ushort) type);
+
+        int payloadSize = pck.Serialize(buffer[2..]);
+
+        return 2 + payloadSize;
+    }
+    public static void Read(ReadOnlySpan<byte> buffer, ref S2C_MatchReadyUpdate pck)
+    {
+        pck.Deserialize(buffer);
+    }
+
 }

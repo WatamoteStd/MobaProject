@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://ytuxo14okr7" path="res://Scenes/MainMenu/Assets/Image/CategoryIcons/LadderIcon.png" id="8_lic31"]
 [ext_resource type="Texture2D" uid="uid://nryws45yxn52" path="res://Scenes/MainMenu/Assets/Image/CategoryIcons/Knowledge.png" id="10_ah1a3"]
 [ext_resource type="Texture2D" uid="uid://btni6ngn1oi3o" path="res://Scenes/MainMenu/Assets/Image/CategoryIcons/Patch.png" id="11_ah1a3"]
+[ext_resource type="PackedScene" uid="uid://dlgcv3i5cfcqa" path="res://Scenes/MainMenu/MatchFoundElements/PlayerElement.tscn" id="15_txptg"]
 
 [sub_resource type="Gradient" id="Gradient_lic31"]
 colors = PackedColorArray(0.21833304, 0.25114214, 0.3292721, 1, 0.10142916, 0.11426883, 0.12726092, 1)
@@ -720,6 +721,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_txptg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cmo68")
 
 [node name="MouseStopper" type="Control" parent="Content" unique_id=377084035]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Content/MouseStopper" unique_id=1297954118]
@@ -814,7 +816,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.27442724, 0.60906094, 0.980009, 1)
 text = "0.0"
 
-[node name="MatchFoundPanel" type="PanelContainer" parent="Content" unique_id=723971469 node_paths=PackedStringArray("_confirmGameButton")]
+[node name="MatchFoundPanel" type="PanelContainer" parent="Content" unique_id=723971469 node_paths=PackedStringArray("_confirmGameButton", "_playersAvatars")]
 custom_minimum_size = Vector2(550, 180)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -822,6 +824,8 @@ size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_ygr85")
 script = ExtResource("5_ua038")
 _confirmGameButton = NodePath("VBoxContainer/AcceptGame")
+_playersAvatars = NodePath("VBoxContainer/PlayersIcons")
+_avatarPrefab = ExtResource("15_txptg")
 
 [node name="bg" type="TextureRect" parent="Content/MatchFoundPanel" unique_id=1364281286]
 layout_mode = 2
@@ -845,6 +849,7 @@ theme_override_font_sizes/font_size = 18
 text = "MATCH FOUND"
 
 [node name="AcceptGame" type="Button" parent="Content/MatchFoundPanel/VBoxContainer" unique_id=1594527245]
+visible = false
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -854,6 +859,12 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_pdr62")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8qovt")
 theme_override_styles/hover = SubResource("StyleBoxFlat_0hjx5")
 text = "ACCEPT"
+
+[node name="PlayersIcons" type="HBoxContainer" parent="Content/MatchFoundPanel/VBoxContainer" unique_id=1136643378]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 1
 
 [node name="ColorPalette" type="Sprite2D" parent="." unique_id=1258398462]
 position = Vector2(-211, 215)
