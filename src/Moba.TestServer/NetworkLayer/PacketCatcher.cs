@@ -1,4 +1,3 @@
-
 using System.Buffers;
 using System.Buffers.Binary;
 using System.IO.Pipelines;
@@ -31,7 +30,6 @@ public class PacketCatcher
 
     public async Task ListenAsync()
     {
-        Console.WriteLine($"[PacketCatcher] Started listening on port: {((IPEndPoint)_socket.LocalEndPoint!).Port}");
         
         try
         {
@@ -52,8 +50,6 @@ public class PacketCatcher
 
             ReadOnlySpan<byte> payload = receivedSpan[2..];
             int payloadLen = result.ReceivedBytes - 2;
-
-            Console.WriteLine($"[Network] Raw packet received! Bytes: {payloadLen} from {result.RemoteEndPoint}");
 
             // PACKETS LOGIC
 
@@ -103,7 +99,7 @@ public class PacketCatcher
 
 
                             if (_channel.TryWrite(cmd)) isOk = true;
-                            Console.WriteLine($"[Packet Catcher] Packet:{packetType.ToString()} received and writen");
+    
 
                         }
                         finally

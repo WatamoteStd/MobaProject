@@ -12,6 +12,9 @@ public partial class GameSession : Node
 	public string MatchIp {get; private set;}
 	public int MatchPort {get; private set;}
 
+	// GAME DATA
+	public ushort LocalPlayerId {get; set;}
+
 	public override void _Ready()
 	{
 		if (Instance != null)

@@ -195,7 +195,7 @@ border_color = Color(0.19434926, 0.19434929, 0.19434911, 1)
 border_blend = true
 
 [sub_resource type="Gradient" id="Gradient_ua038"]
-colors = PackedColorArray(0.026738942, 0.56199735, 0.7815773, 0.15686275, 0.050962053, 0.6695336, 0.46925783, 0.15686275)
+colors = PackedColorArray(0.16470589, 0.15294118, 0.16470589, 0.75686276, 0.43529412, 0.47058824, 0.43137255, 0.35686275)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_6u82b"]
 gradient = SubResource("Gradient_ua038")
@@ -720,7 +720,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_txptg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cmo68")
 
 [node name="MouseStopper" type="Control" parent="Content" unique_id=377084035]
-visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Content/MouseStopper" unique_id=1297954118]

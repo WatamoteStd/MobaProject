@@ -73,14 +73,11 @@ public class MatchmakeController : ControllerBase
             return Unauthorized("Invalid player token");
         }
 
-        Console.WriteLine($"[CONTROLLER] Player {userId} checking status. Looking for key 'match:{userId}'");
         if (_cache.TryGetValue($"match:{userId}", out QueuePlayerStatusResponse cachedStatus))
         {
-            Console.WriteLine($"[CONTROLLER HIT] Found in cache! Status: {cachedStatus.Status}, Port: {cachedStatus.Port}");
             return Ok(cachedStatus);
         }
 
-        Console.WriteLine($"[CONTROLLER MISS] Not found in cache, asking matchmaker...");
 
         var response = await _nats.RequestAsync<long, QueuePlayerStatusResponse>(
             subject: "matchmaker.player.status",

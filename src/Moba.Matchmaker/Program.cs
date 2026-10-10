@@ -42,7 +42,6 @@ Task taskStatus = Task.Run(async () =>
         long userId = msg.Data;
 
         bool isFound = manager.GetPlayer(userId, out var player);
-        Console.WriteLine($"[NATS: Task Status] new request from Id:{userId}. IsFound:{isFound}");
 
         QueuePlayerStatusResponse response;
 
@@ -56,8 +55,6 @@ Task taskStatus = Task.Run(async () =>
         }
 
         await msg.ReplyAsync(response);
-
-        Console.WriteLine($"[NATS: Task Stratus] Reply successfully send to MasterServer!");
 
     }
 });
