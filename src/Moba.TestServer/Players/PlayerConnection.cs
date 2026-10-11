@@ -1,5 +1,6 @@
 
 using System.Net;
+using Moba.Shared.UdpServer.Teams;
 
 namespace Players;
 
@@ -11,5 +12,6 @@ public struct PlayerConnection
     public EndPoint EndPoint;
     public string Nickname;
     public long PlayerId;
+    public MatchTeams Team;
 
 }

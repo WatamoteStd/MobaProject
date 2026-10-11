@@ -25,7 +25,7 @@ border_width_bottom = 3
 border_color = Color(0.80322295, 0.17092016, 0.18837538, 1)
 border_blend = true
 
-[node name="Lobby" type="Control" unique_id=1147972146]
+[node name="Lobby" type="Control" unique_id=1147972146 node_paths=PackedStringArray("_lightTeam", "_darkTeam")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,6 +33,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rqhom")
+_lightTeam = NodePath("PanelContainer/MarginContainer/Content/PlayersAndPeeks/LeftTeam")
+_darkTeam = NodePath("PanelContainer/MarginContainer/Content/PlayersAndPeeks/RightTeam")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=959328185]
 layout_mode = 1

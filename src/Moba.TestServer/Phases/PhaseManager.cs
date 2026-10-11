@@ -6,6 +6,8 @@ using NetworkLayer.DataStructs;
 using Players;
 using Moba.Shared.UdpServer.Packets.Structs;
 using System.Net.Sockets;
+using Moba.Shared.UdpServer.Packets.Lobby;
+using Moba.Shared.UdpServer.Teams;
 
 namespace Phases;
 
@@ -65,6 +67,11 @@ public class PhaseManager
 
                             }
                         break;
+                        case Phases.Picking:
+                            {
+                                ProcessPickPhase(cmd);
+                            }
+                        break;
 
                     }
 
@@ -92,9 +99,42 @@ public class PhaseManager
     {
         
         CurrentPhase = nextPhase;
-        Console.WriteLine($"[Phase Manager] Current phase is:{nextPhase.ToString()}");
+        Console.WriteLine($"[Phase Manager] Phase Changed. Current is:{nextPhase.ToString()}");
 
         OnPhaseChanged?.Invoke(nextPhase);
+
+        if(nextPhase == Phases.Picking)
+        {
+            byte total = (byte)_playersConnections.Length;
+
+            ushort[] ids = new ushort[total];
+            MatchTeams[] teams = new MatchTeams[total];
+            string[] nicknames = new string[total];
+
+            for(int i = 0; i < total; i++)
+            {
+                var pl = _playersConnections[i];
+                ids[i] = pl.Id;
+                teams[i] = pl.Team;
+                nicknames[i] = pl.Nickname;
+            }
+
+            var packet = new S2C_LobbyJoinRequestPacket
+            {
+                PlayersCount = total,
+                Ids = ids,
+                Teams = teams,
+                Nicknames = nicknames
+            };
+
+            Span<byte> buffer = stackalloc byte[1024];
+            int writenBytes = PacketTranslator.Write(PacketTypes.S2C_LobbyJoinRequest, buffer, ref packet);
+
+            for(int i = 0; i < total; i++)
+            {
+                _socket.SendTo(buffer[..writenBytes], _playersConnections[i].EndPoint);
+            }
+        }
 
     }
 
@@ -125,13 +165,17 @@ public class PhaseManager
                         if (_curPlayerId >= _playersConnections.Length)
                             return;
                         
+
+                        MatchTeams pTeam = (_curPlayerId % 2 == 0) ? MatchTeams.Dark : MatchTeams.Light;
+
                         PlayerConnection player = new PlayerConnection
                         {
                             Id = _curPlayerId,
                             IsConnected = true,
                             EndPoint = cmd.PlayerEndPoint,
                             Nickname = packet.Nickname,
-                            PlayerId = packet.UserId
+                            PlayerId = packet.UserId,
+                            Team = pTeam
                         };
                         _playersConnections[_curPlayerId] = player;
 
@@ -169,6 +213,11 @@ public class PhaseManager
 
                         _curPlayerId++;
 
+                        if(_curPlayerId == _playersConnections.Length)
+                        {
+                            ChangePhase(Phases.Picking);
+                        }
+
                     }
 
                 }
@@ -176,6 +225,11 @@ public class PhaseManager
 
         }
 
+    }
+
+    private void ProcessPickPhase(NetworkCommand cmd)
+    {
+        
     }
 
 

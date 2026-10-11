@@ -1,5 +1,6 @@
 using Godot;
 using Moba.Shared.UdpServer.Packets;
+using Moba.Shared.UdpServer.Packets.Lobby;
 using Moba.Shared.UdpServer.Packets.Structs;
 using System;
 using System.Buffers;
@@ -10,6 +11,9 @@ using System.Threading.Channels;
 public partial class ClientUdp : Node
 {
 	public event Action<int, int> OnGameReadyPlayersUpdate; // total and ready
+
+	public event Action<S2C_LobbyJoinRequestPacket> OnSwithToLobby;
+
 	public static ClientUdp Instance {get; private set;}
 	private Socket _socket;
 	private Channel<NetworkPacket> _channel = Channel.CreateUnbounded<NetworkPacket>();
@@ -82,6 +86,20 @@ public partial class ClientUdp : Node
 
 							ArrayPool<byte>.Shared.Return(packet.Buffer);
 							isReturned = true;
+						}
+					break;
+
+					case PacketTypes.S2C_LobbyJoinRequest:
+						{
+							S2C_LobbyJoinRequestPacket pak = default;
+							PacketTranslator.Read(packet.Buffer[..packet.PayloadLength], ref pak);
+
+							OnSwithToLobby?.Invoke(pak);
+
+							GD.Print($"[CLIENT UDP] CHANGE TO LOBBY PACKET RECEIVED!");
+							GD.Print($"[CLIENT UDP] PLAYERS: {pak.PlayersCount}");
+							GD.Print($"[CLIENT UDP] PLAYER 1 ID: {pak.Ids[0]}");
+							GD.Print($"[CLIENT UDP] PLAYER 2 ID: {pak.Ids[1]}");
 						}
 					break;
 
