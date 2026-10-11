@@ -8,15 +8,31 @@ using Moba.Shared.UdpServer.Packets.Structs;
 using System.Net.Sockets;
 using Moba.Shared.UdpServer.Packets.Lobby;
 using Moba.Shared.UdpServer.Teams;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Phases;
 
 public partial class PhaseManager
 {
 
+    [DllImport("winmm.dll", SetLastError = true)]
+    private static extern uint timeBeginPeriod(uint uPeriod);
+    
+    [DllImport("winmm.dll", SetLastError = true)]
+    private static extern uint timeEndPeriod(uint uPeriod);
+
+    private const float FixedDeltaTime = 1f / 60f;
+
+
     public event Action<Phases>? OnPhaseChanged;
     public enum Phases { WaitingForPlayers, Picking, InGame}
+
+
+
     public Phases CurrentPhase = Phases.WaitingForPlayers;
+
+    private Thread? _gameThread;
 
     private readonly Guid _matchGuid;
     private readonly ChannelReader<NetworkCommand> _channel;
@@ -36,21 +52,32 @@ public partial class PhaseManager
         _socket = socket;
 
         ChangePhase(Phases.WaitingForPlayers);
+        timeBeginPeriod(1);
 
     }
 
     public void StartMatch()
     {
         
-        _ = Update();
+        _gameThread = new Thread(Update);
+        _gameThread.IsBackground = false;
+        _gameThread.Priority = ThreadPriority.Highest;
+        _gameThread.Start();
 
     }
 
-    public async Task Update()
+    public void Update()
     {
+
+        long targetTickTicks = Stopwatch.Frequency / 60;
+        
         
         while(true)
         {
+
+            var startTime = Stopwatch.GetTimestamp();
+
+
             while(_channel.TryRead(out var cmd))
             {
                 
@@ -59,39 +86,39 @@ public partial class PhaseManager
                     
                     switch(CurrentPhase)
                     {
-                        
-                        case Phases.WaitingForPlayers:
-                            {
-                                
-                                ProcessWaitingPhase(cmd);
-
-                            }
-                        break;
-                        case Phases.Picking:
-                            {
-                                ProcessPickPhase(cmd);
-                            }
-                        break;
-
+                        case Phases.WaitingForPlayers: ProcessWaitingPhase(cmd); break;
+                        case Phases.Picking: ProcessPickPhase(cmd); break;
                     }
-
                 }
                 finally
                 {
-                    
                     if (cmd.PayloadLength > 0 && cmd.Payload != Array.Empty<byte>())
                     {
                         ArrayPool<byte>.Shared.Return(cmd.Payload);
                     }
-
                 }
 
             }
             
+            var elapsedTicks = Stopwatch.GetTimestamp() - startTime;
+            float deltaTime = (float)elapsedTicks / Stopwatch.Frequency;
 
-            await Task.Delay(16);
+            if(elapsedTicks < targetTickTicks)
+            {
+                int sleepMs = (int)((targetTickTicks - elapsedTicks) * 1000 / Stopwatch.Frequency);
+                if(sleepMs > 1)
+                {
+                    Thread.Sleep(sleepMs - 1);
+                }
+
+                while((Stopwatch.GetTimestamp() - startTime) < targetTickTicks)
+                {
+                    Thread.SpinWait(10);
+                }
+            }
 
         }
+
 
     }
 
@@ -267,6 +294,11 @@ public partial class PhaseManager
 
     }
 
+    private void ProcessGame(NetworkCommand cmd, float deltaTime)
+    {
+        
 
+
+    }
 
 }
