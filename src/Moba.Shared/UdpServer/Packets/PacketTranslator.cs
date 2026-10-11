@@ -91,4 +91,32 @@ public static class PacketTranslator
         pck.Deserialize(buffer);
     }
 
+    public static int Write(PacketTypes type, Span<byte> buffer, ref C2S_LobbyChangeHeroRequestPacket pck)
+    {
+        BinaryPrimitives.WriteUInt16LittleEndian(buffer, (ushort) type);
+
+        int payloadSize = pck.Serialize(buffer[2..]);
+
+        return 2 + payloadSize;
+    }
+    public static void Read(ReadOnlySpan<byte> buffer, ref C2S_LobbyChangeHeroRequestPacket pck)
+    {
+        pck.Deserialize(buffer);
+    }
+
+    public static int Write(PacketTypes type, Span<byte> buffer, ref S2C_LobbyPlayerHeroChangedPacket pck)
+    {
+        
+        BinaryPrimitives.WriteUInt16LittleEndian(buffer, (ushort) type);
+
+        int payloadSize = pck.Serialize(buffer[2..]);
+
+        return 2 + payloadSize;
+
+    }
+    public static void Read(ReadOnlySpan<byte> buffer, ref S2C_LobbyPlayerHeroChangedPacket pck)
+    {
+        pck.Deserialize(buffer);
+    }
+
 }

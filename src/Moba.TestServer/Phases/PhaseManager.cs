@@ -11,7 +11,7 @@ using Moba.Shared.UdpServer.Teams;
 
 namespace Phases;
 
-public class PhaseManager
+public partial class PhaseManager
 {
 
     public event Action<Phases>? OnPhaseChanged;
@@ -230,7 +230,43 @@ public class PhaseManager
     private void ProcessPickPhase(NetworkCommand cmd)
     {
         
+        switch(cmd.Type)
+        {
+            
+            case PacketTypes.C2S_LobbyChangeHeroRequest:
+                {
+                    
+                    C2S_LobbyChangeHeroRequestPacket packet = default;
+                    PacketTranslator.Read(cmd.Payload, ref packet);
+
+
+                    for(int i = 0; i < _playersConnections.Length; i++)
+                    {
+                        
+                        if(_playersConnections[i].EndPoint.Equals(cmd.PlayerEndPoint))
+                        {
+                            
+                            _playersConnections[i].SelectedHero = packet.Hero;
+
+                            S2C_LobbyPlayerHeroChangedPacket response = new S2C_LobbyPlayerHeroChangedPacket
+                            {
+                                PlayerId = _playersConnections[i].Id,
+                                Hero = packet.Hero
+                            };
+
+                            Broadcast(ref response);
+
+                        }
+
+                    }
+
+                }
+            break;
+
+        }
+
     }
+
 
 
 }

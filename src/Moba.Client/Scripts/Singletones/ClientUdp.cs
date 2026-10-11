@@ -11,8 +11,9 @@ using System.Threading.Channels;
 public partial class ClientUdp : Node
 {
 	public event Action<int, int> OnGameReadyPlayersUpdate; // total and ready
-
 	public event Action<S2C_LobbyJoinRequestPacket> OnSwithToLobby;
+	public event Action<S2C_LobbyPlayerHeroChangedPacket> OnLobbyPlayerChanged;
+
 
 	public static ClientUdp Instance {get; private set;}
 	private Socket _socket;
@@ -70,7 +71,6 @@ public partial class ClientUdp : Node
 							GameSession.Instance.LocalPlayerId = pak.LocalPlayerId;
 							OnGameReadyPlayersUpdate?.Invoke(pak.TotalPlayersCount, pak.ActivePlayersCount);
 
-							GD.Print($"[ClientUDP] S2C_HandshakePacket received. PlayerId:{pak.LocalPlayerId}. TotalPlayers:{pak.TotalPlayersCount} Active:{pak.ActivePlayersCount}");
 
 							ArrayPool<byte>.Shared.Return(packet.Buffer);
 							isReturned = true;
@@ -96,10 +96,22 @@ public partial class ClientUdp : Node
 
 							OnSwithToLobby?.Invoke(pak);
 
-							GD.Print($"[CLIENT UDP] CHANGE TO LOBBY PACKET RECEIVED!");
-							GD.Print($"[CLIENT UDP] PLAYERS: {pak.PlayersCount}");
-							GD.Print($"[CLIENT UDP] PLAYER 1 ID: {pak.Ids[0]}");
-							GD.Print($"[CLIENT UDP] PLAYER 2 ID: {pak.Ids[1]}");
+							ArrayPool<byte>.Shared.Return(packet.Buffer);
+							isReturned = true;
+						}
+					break;
+
+					case PacketTypes.S2C_LobbyPlayerHeroChanged:
+						{
+							
+							S2C_LobbyPlayerHeroChangedPacket pak = default;
+							PacketTranslator.Read(packet.Buffer[..packet.PayloadLength], ref pak);
+
+							OnLobbyPlayerChanged?.Invoke(pak);
+
+							ArrayPool<byte>.Shared.Return(packet.Buffer);
+							isReturned = true;
+
 						}
 					break;
 
@@ -117,6 +129,16 @@ public partial class ClientUdp : Node
 			
 
 		}
+
+	}
+
+	public void Lobby_SendHeroChange(C2S_LobbyChangeHeroRequestPacket packet)
+	{
+		
+		Span<byte> buffer = stackalloc byte[16];
+		int writenBytes = PacketTranslator.Write(PacketTypes.C2S_LobbyChangeHeroRequest, buffer, ref packet);
+
+		_socket.Send(buffer[..writenBytes]);
 
 	}
 

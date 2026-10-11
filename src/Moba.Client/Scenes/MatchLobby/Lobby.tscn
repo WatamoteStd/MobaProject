@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://bnlu3mdwxt37" path="res://Scenes/MatchLobby/Lobby.cs" id="1_rqhom"]
 [ext_resource type="PackedScene" uid="uid://d1yrt3w1i5imf" path="res://Scenes/MatchLobby/PlayerSlots/PlayerSlot.tscn" id="2_iwrse"]
 [ext_resource type="Script" uid="uid://c6ldgkt2s6jv1" path="res://Scenes/MatchLobby/LobbyTeam.cs" id="2_q2bhe"]
+[ext_resource type="Texture2D" uid="uid://ct104qcdvy6ud" path="res://Assets/Heroes/Icons/FirstHero/FirstHeroAvatarVertical.PNG" id="4_tmqc7"]
+[ext_resource type="Texture2D" uid="uid://du2i17qorgojg" path="res://Assets/Heroes/Icons/FirstHero/VerticalPressed.png" id="5_jxh7q"]
+[ext_resource type="Texture2D" uid="uid://b4ianqii2rma" path="res://Assets/Heroes/Icons/FirstHero/VerticalHover.png" id="6_xr0go"]
+[ext_resource type="Script" uid="uid://dy77xdheye540" path="res://Scenes/MatchLobby/HeroSelectButton.cs" id="7_jxh7q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83fg3"]
 bg_color = Color(0.10249352, 0.10249352, 0.10249349, 1)
@@ -25,7 +29,7 @@ border_width_bottom = 3
 border_color = Color(0.80322295, 0.17092016, 0.18837538, 1)
 border_blend = true
 
-[node name="Lobby" type="Control" unique_id=1147972146 node_paths=PackedStringArray("_lightTeam", "_darkTeam")]
+[node name="Lobby" type="Control" unique_id=1147972146 node_paths=PackedStringArray("_lightTeam", "_darkTeam", "_heroSelectButtons")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,6 +39,7 @@ grow_vertical = 2
 script = ExtResource("1_rqhom")
 _lightTeam = NodePath("PanelContainer/MarginContainer/Content/PlayersAndPeeks/LeftTeam")
 _darkTeam = NodePath("PanelContainer/MarginContainer/Content/PlayersAndPeeks/RightTeam")
+_heroSelectButtons = [NodePath("PanelContainer/MarginContainer/Content/Heroes/Hero1Button")]
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=959328185]
 layout_mode = 1
@@ -90,3 +95,19 @@ Team = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Heroes" type="GridContainer" parent="PanelContainer/MarginContainer/Content" unique_id=374212180]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+columns = 3
+
+[node name="Hero1Button" type="TextureButton" parent="PanelContainer/MarginContainer/Content/Heroes" unique_id=267188523]
+custom_minimum_size = Vector2(170, 256)
+layout_mode = 2
+texture_normal = ExtResource("4_tmqc7")
+texture_pressed = ExtResource("5_jxh7q")
+texture_hover = ExtResource("6_xr0go")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("7_jxh7q")

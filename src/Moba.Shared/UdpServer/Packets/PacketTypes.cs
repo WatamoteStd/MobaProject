@@ -9,6 +9,8 @@ public enum PacketTypes : ushort
     C2S_Handshake = 2,
     S2C_HandshakeResponse = 3,
     S2C_MatchReadyUpdate = 4,
-    S2C_LobbyJoinRequest = 5
+    S2C_LobbyJoinRequest = 5,
+    C2S_LobbyChangeHeroRequest = 6,
+    S2C_LobbyPlayerHeroChanged = 7
 
 }

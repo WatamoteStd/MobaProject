@@ -2,6 +2,7 @@ using Godot;
 using Moba.Shared.UdpServer.Heroes;
 using Moba.Shared.UdpServer.Teams;
 using System;
+using System.Collections.Generic;
 
 public partial class LobbyTeam : PanelContainer
 {
@@ -9,6 +10,7 @@ public partial class LobbyTeam : PanelContainer
 	[Export] private HBoxContainer _playersContainer;
 	[Export] private PackedScene _playerPrefab;
 	[Export] public MatchTeams Team;
+	public readonly Dictionary<ushort, PlayerSlot> IdToSlot = new();
 
 	public void AddPlayer(string nickname, ushort id, bool isLocalPlayer)
 	{
@@ -16,6 +18,7 @@ public partial class LobbyTeam : PanelContainer
 		var newPlayer = _playerPrefab.Instantiate<PlayerSlot>();
 		_playersContainer.AddChild(newPlayer);
 		newPlayer.Initiate(nickname, id, isLocalPlayer);
+		IdToSlot[id] = newPlayer;
 
 	}
 
