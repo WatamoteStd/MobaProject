@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://5v41wl3lhtxx"]
+
+[ext_resource type="Script" uid="uid://bnlu3mdwxt37" path="res://Scenes/MatchLobby/Lobby.cs" id="1_rqhom"]
+[ext_resource type="PackedScene" uid="uid://d1yrt3w1i5imf" path="res://Scenes/MatchLobby/PlayerSlots/PlayerSlot.tscn" id="2_iwrse"]
+[ext_resource type="Script" uid="uid://c6ldgkt2s6jv1" path="res://Scenes/MatchLobby/LobbyTeam.cs" id="2_q2bhe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83fg3"]
+bg_color = Color(0.10249352, 0.10249352, 0.10249349, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q2bhe"]
+bg_color = Color(0.41498443, 0.4875865, 0.5105408, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.44213536, 0.60669845, 0.8086456, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6u82b"]
+bg_color = Color(0.65602463, 0.3546038, 0.28922036, 1)
+border_width_left = 3
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 3
+border_color = Color(0.80322295, 0.17092016, 0.18837538, 1)
+border_blend = true
+
+[node name="Lobby" type="Control" unique_id=1147972146]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rqhom")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=959328185]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_83fg3")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=2058899032]
+layout_mode = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 9
+theme_override_constants/margin_bottom = 9
+
+[node name="Content" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1321628529]
+layout_mode = 2
+
+[node name="PlayersAndPeeks" type="HBoxContainer" parent="PanelContainer/MarginContainer/Content" unique_id=345370884]
+layout_mode = 2
+
+[node name="LeftTeam" type="PanelContainer" parent="PanelContainer/MarginContainer/Content/PlayersAndPeeks" unique_id=1131390157 node_paths=PackedStringArray("_playersContainer")]
+custom_minimum_size = Vector2(400, 90)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_q2bhe")
+script = ExtResource("2_q2bhe")
+_playersContainer = NodePath("Players")
+_playerPrefab = ExtResource("2_iwrse")
+
+[node name="Players" type="HBoxContainer" parent="PanelContainer/MarginContainer/Content/PlayersAndPeeks/LeftTeam" unique_id=1857141681]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/Content/PlayersAndPeeks" unique_id=1959290175]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="RightTeam" type="PanelContainer" parent="PanelContainer/MarginContainer/Content/PlayersAndPeeks" unique_id=681123373 node_paths=PackedStringArray("_playersContainer")]
+custom_minimum_size = Vector2(400, 75)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_6u82b")
+script = ExtResource("2_q2bhe")
+_playersContainer = NodePath("Players")
+_playerPrefab = ExtResource("2_iwrse")
+Team = 1
+
+[node name="Players" type="HBoxContainer" parent="PanelContainer/MarginContainer/Content/PlayersAndPeeks/RightTeam" unique_id=249832025]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4

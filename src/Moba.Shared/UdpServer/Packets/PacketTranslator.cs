@@ -1,6 +1,7 @@
 
 using System.Buffers.Binary;
 using System.Runtime.CompilerServices;
+using Moba.Shared.UdpServer.Packets.Lobby;
 using Moba.Shared.UdpServer.Packets.Structs;
 
 namespace Moba.Shared.UdpServer.Packets;
@@ -73,6 +74,19 @@ public static class PacketTranslator
         return 2 + payloadSize;
     }
     public static void Read(ReadOnlySpan<byte> buffer, ref S2C_MatchReadyUpdate pck)
+    {
+        pck.Deserialize(buffer);
+    }
+
+    public static int Write(PacketTypes type, Span<byte> buffer, ref S2C_LobbyJoinRequestPacket pck)
+    {
+        BinaryPrimitives.WriteUInt16LittleEndian(buffer, (ushort) type);
+
+        int payloadSize = pck.Serialize(buffer[2..]);
+
+        return 2 + payloadSize;
+    }
+    public static void Read(ReadOnlySpan<byte> buffer, ref S2C_LobbyJoinRequestPacket pck)
     {
         pck.Deserialize(buffer);
     }

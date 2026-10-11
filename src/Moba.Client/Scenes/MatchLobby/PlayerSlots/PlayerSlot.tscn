@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://d1yrt3w1i5imf"]
+
+[ext_resource type="Script" uid="uid://4l0qvbyu0ghc" path="res://Scenes/MatchLobby/PlayerSlots/PlayerSlot.cs" id="1_u6smm"]
+[ext_resource type="Texture2D" uid="uid://cyeofhhqhc7in" path="res://Scenes/MainMenu/MatchFoundElements/PlayerIcon.png" id="2_ec8i5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohmwr"]
+bg_color = Color(0.101960786, 0.4117647, 0.49411765, 1)
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83fg3"]
+bg_color = Color(0.13682577, 0.13682574, 0.13682571, 0.7529412)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.67068946, 0.6706895, 0.67068917, 1)
+border_blend = true
+
+[node name="PlayerSlot" type="PanelContainer" unique_id=1241291760 node_paths=PackedStringArray("_avatar", "_nicknameLabel")]
+custom_minimum_size = Vector2(64, 48)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ohmwr")
+script = ExtResource("1_u6smm")
+_avatar = NodePath("VBoxContainer/Borders/Icon")
+_nicknameLabel = NodePath("VBoxContainer/Nickname/Nickname")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1383906837]
+layout_mode = 2
+
+[node name="Borders" type="MarginContainer" parent="VBoxContainer" unique_id=265316325]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="bg" type="ColorRect" parent="VBoxContainer/Borders" unique_id=1417071053]
+layout_mode = 2
+color = Color(0.101960786, 0.4117647, 0.49411765, 1)
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/Borders" unique_id=302441578]
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+texture = ExtResource("2_ec8i5")
+expand_mode = 1
+
+[node name="Nickname" type="PanelContainer" parent="VBoxContainer" unique_id=1426619477]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_83fg3")
+
+[node name="Nickname" type="Label" parent="VBoxContainer/Nickname" unique_id=76700159]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 10
+text = "Nickname"

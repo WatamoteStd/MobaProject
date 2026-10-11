@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://btsuk3spfvjqx"]
+
+[ext_resource type="PackedScene" uid="uid://bts0rqkdtto3h" path="res://Assets/Models/Heroes/First/hero1.glb" id="1_tfo8w"]
+
+[sub_resource type="Environment" id="Environment_83fg3"]
+background_mode = 1
+background_color = Color(0.55528086, 0.07741354, 0, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.61474794, 0.63412845, 0.6090769, 1)
+
+[node name="hero1" unique_id=1739739417 instance=ExtResource("1_tfo8w")]
+transform = Transform3D(0.05508204, 0, 0.9984818, 0, 1, 0, -0.9984818, 0, 0.05508204, 0, 0, 0)
+
+[node name="Head" parent="." index="0" unique_id=1293216747]
+transform = Transform3D(0.99998236, -0.0059165843, -0.00031820312, 0.0059165843, 0.99421436, 0.10725096, -0.0003181994, -0.10725095, 0.99423194, -0.02650888, 2.5977561, -0.0135362735)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="8" unique_id=1139454820]
+environment = SubResource("Environment_83fg3")
+
+[node name="Camera3D" type="Camera3D" parent="." index="9" unique_id=1916405111]
+transform = Transform3D(0.009528841, 0.9999542, -0.0008292161, -0.9849228, 0.009528842, 0.17273176, 0.17273174, -0.00082920864, 0.98496854, -0.015355937, 2.2757137, 1.8179828)
+current = true
