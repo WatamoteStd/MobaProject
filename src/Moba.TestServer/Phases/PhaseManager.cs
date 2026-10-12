@@ -40,6 +40,10 @@ public partial class PhaseManager
     private readonly HashSet<long> _allowedIds;
     private PlayerConnection[] _playersConnections;
     private ushort _curPlayerId = 0;
+
+    // tools
+    private float _timerBeforeMatchStart = 15.0f;
+
     public PhaseManager(int playersCount, ChannelReader<NetworkCommand> channel, Guid matchGuid, HashSet<long> playersIds, Socket socket) 
     {
         
@@ -87,7 +91,12 @@ public partial class PhaseManager
                     switch(CurrentPhase)
                     {
                         case Phases.WaitingForPlayers: ProcessWaitingPhase(cmd); break;
-                        case Phases.Picking: ProcessPickPhase(cmd); break;
+                        case Phases.Picking:
+                            {
+                                ProcessPickPhase(cmd);
+                            }
+                        break;
+                        case Phases.InGame: ProcessGame(cmd); break;
                     }
                 }
                 finally
@@ -101,7 +110,23 @@ public partial class PhaseManager
             }
             
             var elapsedTicks = Stopwatch.GetTimestamp() - startTime;
-            float deltaTime = (float)elapsedTicks / Stopwatch.Frequency;
+
+            if (CurrentPhase == Phases.Picking)
+            {
+                _timerBeforeMatchStart -= FixedDeltaTime;
+    
+                if (_timerBeforeMatchStart <= 0.0f)
+                {
+                    ChangePhase(Phases.InGame);
+                }
+            }
+            else if(CurrentPhase == Phases.InGame)
+            {
+                
+                
+
+            }
+
 
             if(elapsedTicks < targetTickTicks)
             {
@@ -294,7 +319,7 @@ public partial class PhaseManager
 
     }
 
-    private void ProcessGame(NetworkCommand cmd, float deltaTime)
+    private void ProcessGame(NetworkCommand cmd)
     {
         
 
