@@ -10,6 +10,8 @@ using Moba.Shared.UdpServer.Packets.Lobby;
 using Moba.Shared.UdpServer.Teams;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Moba.Shared.UdpServer.Heroes;
+using Match;
 
 namespace Phases;
 
@@ -40,6 +42,8 @@ public partial class PhaseManager
     private readonly HashSet<long> _allowedIds;
     private PlayerConnection[] _playersConnections;
     private ushort _curPlayerId = 0;
+
+    private MatchHolder? _matchHolder;
 
     // tools
     private float _timerBeforeMatchStart = 15.0f;
@@ -186,6 +190,10 @@ public partial class PhaseManager
             {
                 _socket.SendTo(buffer[..writenBytes], _playersConnections[i].EndPoint);
             }
+        }
+        else if(nextPhase == Phases.InGame)
+        {
+            _matchHolder = new MatchHolder(_playersConnections);
         }
 
     }

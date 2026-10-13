@@ -7,23 +7,23 @@ using System.Collections.Generic;
 
 public partial class LobbyCache : Node
 {
-    
-    public Dictionary<ushort, LobbyCachedPlayer> IdToPlayerCache = new();
+	
+	public Dictionary<ushort, LobbyCachedPlayer> IdToPlayerCache = new();
 
-    public void AddPlayer(ushort id, string nickname, MatchTeams team, MatchHeroes hero)
-    {
-        
-        IdToPlayerCache[id] = new LobbyCachedPlayer { PlayerId = id, Nickname = nickname, PlayerTeam = team, SelectedHero = hero};
+	public void AddPlayer(ushort id, string nickname, MatchTeams team, MatchHeroes hero)
+	{
+		
+		IdToPlayerCache[id] = new LobbyCachedPlayer { PlayerId = id, Nickname = nickname, PlayerTeam = team, SelectedHero = hero};
 
-    }
-    public void UpdatePlayerHero(ushort id, MatchHeroes hero)
-    {
-        
-        if(IdToPlayerCache.TryGetValue(id, out var cache))
-        {
-            cache.SelectedHero = hero;
-        }
+	}
+	public void UpdatePlayerHero(ushort id, MatchHeroes hero)
+	{
+		
+		if(IdToPlayerCache.TryGetValue(id, out var cache))
+		{
+			cache.SelectedHero = hero;
+		}
 
-    }
+	}
 
 }

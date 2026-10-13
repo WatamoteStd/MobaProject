@@ -35,6 +35,7 @@ public partial class LobbyTeam : PanelContainer
 					if(player.PlayerId == playerId)
 					{
 						player.UpdateAvatar("res://Assets/Heroes/Icons/FirstHero/FirstHeroAvatarLong.PNG");
+						GD.Print($"Changed hero local! Id:{GameSession.Instance.UserId}");
 					}
 				}
 			}
