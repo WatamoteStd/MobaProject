@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bmdei8167dpev"]
+
+[ext_resource type="Script" uid="uid://b7xkkss1dfudt" path="res://Scripts/Entities/BaseEntity.cs" id="1_ms60r"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_83fg3"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_83fg3"]
+viewport_path = NodePath("HealthBarSprite/SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6u82b"]
+bg_color = Color(0.6927386, 0.6927386, 0.69273853, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ichqs"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1305370661 node_paths=PackedStringArray("_healthBar", "_modelContainer", "_collisionShape")]
+script = ExtResource("1_ms60r")
+_healthBar = NodePath("HealthBarSprite/SubViewport/ProgressBar")
+_modelContainer = NodePath("Model")
+_collisionShape = NodePath("CollisionShape3D")
+
+[node name="Model" type="Node3D" parent="." unique_id=1603695403]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=580152638]
+shape = SubResource("CylinderShape3D_83fg3")
+
+[node name="HealthBarSprite" type="Sprite3D" parent="." unique_id=1524089440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8663921, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_83fg3")
+
+[node name="SubViewport" type="SubViewport" parent="HealthBarSprite" unique_id=1096135636]
+size = Vector2i(350, 25)
+
+[node name="ProgressBar" type="ProgressBar" parent="HealthBarSprite/SubViewport" unique_id=1118223747]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_6u82b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ichqs")
+show_percentage = false

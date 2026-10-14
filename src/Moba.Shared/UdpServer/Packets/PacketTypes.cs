@@ -12,6 +12,6 @@ public enum PacketTypes : ushort
     S2C_LobbyJoinRequest = 5,
     C2S_LobbyChangeHeroRequest = 6,
     S2C_LobbyPlayerHeroChanged = 7,
-    S2C_JoinGame = 8
+    S2C_PlayersSpawn = 8
 
 }

@@ -1,6 +1,7 @@
 
 using System.Buffers.Binary;
 using System.Runtime.CompilerServices;
+using Moba.Shared.UdpServer.Packets.Game;
 using Moba.Shared.UdpServer.Packets.Lobby;
 using Moba.Shared.UdpServer.Packets.Structs;
 
@@ -115,6 +116,17 @@ public static class PacketTranslator
 
     }
     public static void Read(ReadOnlySpan<byte> buffer, ref S2C_LobbyPlayerHeroChangedPacket pck)
+    {
+        pck.Deserialize(buffer);
+    }
+    public static int Write(PacketTypes type, Span<byte> buffer, ref S2C_PlayersSpawnPacket pck)
+    {
+        BinaryPrimitives.WriteUInt16LittleEndian(buffer, (ushort) type);
+        int paylaodSize = pck.Serialize(buffer[2..]);
+
+        return 2 + paylaodSize;
+    }
+    public static void Read(ReadOnlySpan<byte> buffer, ref S2C_PlayersSpawnPacket pck)
     {
         pck.Deserialize(buffer);
     }

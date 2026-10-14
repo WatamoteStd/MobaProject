@@ -1,9 +1,11 @@
 using Godot;
 using Moba.Shared.UdpServer.Packets;
+using Moba.Shared.UdpServer.Packets.Game;
 using Moba.Shared.UdpServer.Packets.Lobby;
 using Moba.Shared.UdpServer.Packets.Structs;
 using System;
 using System.Buffers;
+using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Channels;
@@ -19,6 +21,8 @@ public partial class ClientUdp : Node
 	private Socket _socket;
 	private Channel<NetworkPacket> _channel = Channel.CreateUnbounded<NetworkPacket>();
 	private PacketListner _listener;
+
+	private ConcurrentQueue<NetworkPacket> _gamePacketQueue = new();
 
 	public override void _EnterTree()
 	{
@@ -115,6 +119,10 @@ public partial class ClientUdp : Node
 						}
 					break;
 
+					case PacketTypes.S2C_PlayersSpawn: 
+						_gamePacketQueue.Enqueue(packet); 
+						break;
+
 			}
 
 			}
@@ -140,6 +148,13 @@ public partial class ClientUdp : Node
 
 		_socket.Send(buffer[..writenBytes]);
 
+	}
+
+
+
+	public bool TryGetGamePacket(out NetworkPacket packet)
+	{
+		return _gamePacketQueue.TryDequeue(out packet);
 	}
 
 
