@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cpybjiaymbjr3"]
+
+[ext_resource type="Script" uid="uid://kxf2os7mekow" path="res://Scripts/Entities/RemotePlayerEntity.cs" id="1_tqqdi"]
+[ext_resource type="PackedScene" uid="uid://d4anrcqgy5kfc" path="res://Scenes/Units/Heroes/FirstHero/FirstHero.tscn" id="2_xogh8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_83fg3"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_83fg3"]
+viewport_path = NodePath("HealthBarSprite/SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohqdn"]
+bg_color = Color(0.6927386, 0.6927386, 0.69273853, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqqdi"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=149125390 node_paths=PackedStringArray("_nickname", "_healthBar", "_modelContainer", "_collisionShape")]
+script = ExtResource("1_tqqdi")
+_nickname = NodePath("HealthBarSprite/SubViewport/VBoxContainer/Label")
+_healthBar = NodePath("HealthBarSprite/SubViewport/VBoxContainer/ProgressBar")
+_modelContainer = NodePath("Model")
+_collisionShape = NodePath("CollisionShape3D")
+
+[node name="Model" type="Node3D" parent="." unique_id=689441967]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2100849532]
+shape = SubResource("CylinderShape3D_83fg3")
+
+[node name="HealthBarSprite" type="Sprite3D" parent="." unique_id=726899665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.743879, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_83fg3")
+
+[node name="SubViewport" type="SubViewport" parent="HealthBarSprite" unique_id=1410891496]
+transparent_bg = true
+size = Vector2i(500, 150)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HealthBarSprite/SubViewport" unique_id=240647368]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HealthBarSprite/SubViewport/VBoxContainer" unique_id=1571656165]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 38
+text = "Nickname"
+
+[node name="ProgressBar" type="ProgressBar" parent="HealthBarSprite/SubViewport/VBoxContainer" unique_id=710783259]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_ohqdn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tqqdi")
+show_percentage = false
+
+[node name="hero1" parent="." unique_id=557745261 instance=ExtResource("2_xogh8")]

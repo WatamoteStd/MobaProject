@@ -24,6 +24,7 @@ public partial class Lobby : Control
 		}
 
 		ClientUdp.Instance.OnLobbyPlayerChanged += UpdatePlayerChoice;
+		ClientUdp.Instance.OnStartGame += LoadToGame;
 
 	}
 

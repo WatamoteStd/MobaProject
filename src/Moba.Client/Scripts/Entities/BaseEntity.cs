@@ -86,6 +86,8 @@ public partial class BaseEntity : CharacterBody3D
 
 		InitiateModel();
 
+		RecolorHealthBar();
+
 	}
 
 
@@ -104,6 +106,15 @@ public partial class BaseEntity : CharacterBody3D
 
 		var model = modelPrefab.Instantiate();
 		_modelContainer.AddChild(model);
+	}
+
+	private void RecolorHealthBar()
+	{
+		if(Team != MatchSession.Instance.LocalPlayerTeam)
+		{
+			_healthBar.Modulate = Colors.Red;
+		}
+		else _healthBar.Modulate = Colors.Green;
 	}
 
 

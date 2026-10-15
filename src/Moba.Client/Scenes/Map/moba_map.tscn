@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://d1rrvhhd6nso1" path="res://Scenes/Map/Scripts/EntityManager.cs" id="1_puxo0"]
 [ext_resource type="PackedScene" uid="uid://3udfkqm1six4" path="res://JUST_TEST.tscn" id="1_vutnq"]
 [ext_resource type="PackedScene" uid="uid://bmdei8167dpev" path="res://Scenes/Entities/Prefabs/Entity.tscn" id="2_g0hjt"]
+[ext_resource type="PackedScene" uid="uid://cpybjiaymbjr3" path="res://Scenes/Entities/Prefabs/RemotePlayer.tscn" id="3_t5iws"]
+[ext_resource type="PackedScene" uid="uid://btv5nhfl5uepq" path="res://Scenes/Entities/Prefabs/LocalPlayer.tscn" id="4_62glp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6u82b"]
 size = Vector3(256, 0.02, 256)
@@ -22,6 +24,8 @@ ssao_enabled = true
 [node name="EntityManager" type="Node" parent="." unique_id=685302781 node_paths=PackedStringArray("_entitiesContainer")]
 script = ExtResource("1_puxo0")
 _entityPrefab = ExtResource("2_g0hjt")
+_remotePlayerPrefab = ExtResource("3_t5iws")
+_localPlayerPrefab = ExtResource("4_62glp")
 _entitiesContainer = NodePath("../Entities")
 
 [node name="Core" type="Node3D" parent="." unique_id=816845330]
@@ -44,7 +48,3 @@ shadow_enabled = true
 environment = SubResource("Environment_83fg3")
 
 [node name="Entities" type="Node3D" parent="." unique_id=821078790]
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1244529275]
-transform = Transform3D(0.02740545, 0.6935194, -0.71991646, -0.026381478, 0.7204379, 0.69301754, 0.99927616, 3.32134e-09, 0.038039993, -14.804437, 15.192928, 0)
-current = true

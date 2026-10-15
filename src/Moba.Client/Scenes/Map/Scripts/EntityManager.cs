@@ -57,31 +57,36 @@ public partial class EntityManager : Node
 
 		for(int i = 0; i < data.EntityIds.Length; i++)
 		{
-			
-			var player = _entityPrefab.Instantiate<BaseEntity>();
+
 			var pos = new Vector3(data.PosX[i], 1.0f, data.PosZ[i]);
+			
+			
+			if(!MatchSession.Instance.LobbyCachedData.TryGetValue(data.PlayersIds[i], out var curPlayerCache)) continue;
 
-			ushort targetPlayerId = data.PlayersIds[i];
-
-			int lobbyIndex = -1;
-			for(int j = 0; j < lobbyCache.Ids.Length; j++)
+			if(curPlayerCache.PlayerId == GameSession.Instance.LocalPlayerId)
 			{
-				if(lobbyCache.Ids[j] == targetPlayerId)
-				{
-					lobbyIndex = j;
-					break;
-				}
+				
+				var locPlayer = _localPlayerPrefab.Instantiate<LocalPlayerEntity>();
+				locPlayer.InitDefault(curPlayerCache.SelectedHero, data.EntityIds[i], pos, curPlayerCache.PlayerTeam);
+				locPlayer.InitRemote(curPlayerCache.Nickname, data.PlayersIds[i]);
+				_entitiesContainer.AddChild(locPlayer);
+				locPlayer.GlobalPosition = pos;
+
+				_idToEntity[locPlayer.ServerId] = locPlayer;
+
 			}
-			
-			MatchTeams team = lobbyIndex != -1 ? lobbyCache.Teams[lobbyIndex] : MatchTeams.Dark;
-			
-			player.InitDefault(data.Heroes[i], data.EntityIds[i], pos, team);
-			//player.InitDefault(data.Heroes[i], data.EntityIds[i], pos, lobbyCache.Teams[lobbyCache.Ids[data.PlayersIds[i]]]);
+			else
+			{
+				var remotePlayer = _remotePlayerPrefab.Instantiate<RemotePlayerEntity>();
+				remotePlayer.InitDefault(curPlayerCache.SelectedHero, data.EntityIds[i], pos, curPlayerCache.PlayerTeam);
+				remotePlayer.InitRemote(curPlayerCache.Nickname, data.PlayersIds[i]);
+				_entitiesContainer.AddChild(remotePlayer);
+				remotePlayer.GlobalPosition = pos;
 
-			_entitiesContainer.AddChild(player);
-			player.GlobalPosition = pos;
+				_idToEntity[remotePlayer.ServerId] = remotePlayer;
 
-			_idToEntity[data.EntityIds[i]] = player;
+				GD.Print($"[EntitiesManager] Added new remote player.");
+			}
 
 
 		}

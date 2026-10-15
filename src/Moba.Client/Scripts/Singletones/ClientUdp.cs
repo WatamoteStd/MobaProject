@@ -15,6 +15,7 @@ public partial class ClientUdp : Node
 	public event Action<int, int> OnGameReadyPlayersUpdate; // total and ready
 	public event Action<S2C_LobbyJoinRequestPacket> OnSwithToLobby;
 	public event Action<S2C_LobbyPlayerHeroChangedPacket> OnLobbyPlayerChanged;
+	public event Action OnStartGame;
 
 
 	public static ClientUdp Instance {get; private set;}
@@ -120,6 +121,7 @@ public partial class ClientUdp : Node
 					break;
 
 					case PacketTypes.S2C_PlayersSpawn: 
+						OnStartGame?.Invoke();
 						SceneManager.Instance.LoadToGame();
 						_gamePacketQueue.Enqueue(packet); 
 						break;
