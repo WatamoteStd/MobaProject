@@ -5,10 +5,11 @@ using System;
 public partial class SceneManager : Node
 {
 
-	public enum Scenes : byte { Login, Menu, Lobby }
+	public enum Scenes : byte { Login, Menu, Lobby, Map}
 	public Scenes CurrentScene {get; private set; } = Scenes.Login;
 	public static SceneManager Instance {get; private set;}
 	private string _lobbyScenePath = "res://Scenes/MatchLobby/Lobby.tscn";
+	private string _mapPath = "res://Scenes/Map/moba_map.tscn";
 
 	// CACHE
 	public S2C_LobbyJoinRequestPacket LobbyCache {get; private set;}
@@ -42,6 +43,14 @@ public partial class SceneManager : Node
 		LobbyCache = packet;
 		GetTree().ChangeSceneToFile(_lobbyScenePath);
 		CurrentScene = Scenes.Lobby;
+
+	}
+
+	public void LoadToGame()
+	{
+		
+		GetTree().ChangeSceneToFile(_mapPath);
+		CurrentScene = Scenes.Map;
 
 	}
 

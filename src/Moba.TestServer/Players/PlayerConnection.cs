@@ -12,7 +12,7 @@ public struct PlayerConnection
     public bool IsConnected;
     public EndPoint EndPoint;
     public string Nickname;
-    public long PlayerId;
+    public long UserId;
     public MatchTeams Team;
     public MatchHeroes SelectedHero;
 

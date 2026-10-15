@@ -59,29 +59,30 @@ public partial class EntityManager : Node
 		{
 			
 			var player = _entityPrefab.Instantiate<BaseEntity>();
-            var pos = new Vector3(data.PosX[i], 1.0f, data.PosZ[i]);
+			var pos = new Vector3(data.PosX[i], 1.0f, data.PosZ[i]);
 
-            ushort targetPlayerId = data.PlayersIds[i];
+			ushort targetPlayerId = data.PlayersIds[i];
 
-            int lobbyIndex = -1;
-            for(int j = 0; j < lobbyCache.Ids.Length; j++)
-            {
-                if(lobbyCache.Ids[j] == targetPlayerId)
-                {
-                    lobbyIndex = j;
-                    break;
-                }
-            }
-            
-            MatchTeams team = lobbyIndex != -1 ? lobbyCache.Teams[lobbyIndex] : MatchTeams.Dark;
+			int lobbyIndex = -1;
+			for(int j = 0; j < lobbyCache.Ids.Length; j++)
+			{
+				if(lobbyCache.Ids[j] == targetPlayerId)
+				{
+					lobbyIndex = j;
+					break;
+				}
+			}
 			
-            player.InitDefault(data.Heroes[i], data.EntityIds[i], pos, team);
+			MatchTeams team = lobbyIndex != -1 ? lobbyCache.Teams[lobbyIndex] : MatchTeams.Dark;
+			
+			player.InitDefault(data.Heroes[i], data.EntityIds[i], pos, team);
 			//player.InitDefault(data.Heroes[i], data.EntityIds[i], pos, lobbyCache.Teams[lobbyCache.Ids[data.PlayersIds[i]]]);
 
-            _entitiesContainer.AddChild(player);
-            player.GlobalPosition = pos;
+			_entitiesContainer.AddChild(player);
+			player.GlobalPosition = pos;
 
-            _idToEntity[data.EntityIds[i]] = player;
+			_idToEntity[data.EntityIds[i]] = player;
+
 
 		}
 

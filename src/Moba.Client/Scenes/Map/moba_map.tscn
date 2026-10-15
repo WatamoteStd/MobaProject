@@ -46,4 +46,5 @@ environment = SubResource("Environment_83fg3")
 [node name="Entities" type="Node3D" parent="." unique_id=821078790]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1244529275]
-transform = Transform3D(0.03072823, 0.5894737, -0.80720294, -0.02242358, 0.8077875, 0.58904713, 0.99927616, 3.1304448e-10, 0.038039997, -11.136866, 11.670162, 0)
+transform = Transform3D(0.02740545, 0.6935194, -0.71991646, -0.026381478, 0.7204379, 0.69301754, 0.99927616, 3.32134e-09, 0.038039993, -14.804437, 15.192928, 0)
+current = true

@@ -120,6 +120,7 @@ public partial class ClientUdp : Node
 					break;
 
 					case PacketTypes.S2C_PlayersSpawn: 
+						SceneManager.Instance.LoadToGame();
 						_gamePacketQueue.Enqueue(packet); 
 						break;
 

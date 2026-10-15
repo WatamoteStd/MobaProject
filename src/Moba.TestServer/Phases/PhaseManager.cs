@@ -193,7 +193,7 @@ public partial class PhaseManager
         }
         else if(nextPhase == Phases.InGame)
         {
-            _matchHolder = new MatchHolder(_playersConnections);
+            _matchHolder = new MatchHolder(_playersConnections, this);
         }
 
     }
@@ -214,7 +214,7 @@ public partial class PhaseManager
 
                         for(int i = 0; i < _curPlayerId; i++)
                         {
-                            if (_playersConnections[i].PlayerId == packet.UserId)
+                            if (_playersConnections[i].UserId == packet.UserId)
                             {
                                 _playersConnections[i].IsConnected = true;
                                 _playersConnections[i].EndPoint = cmd.PlayerEndPoint;
@@ -234,12 +234,12 @@ public partial class PhaseManager
                             IsConnected = true,
                             EndPoint = cmd.PlayerEndPoint,
                             Nickname = packet.Nickname,
-                            PlayerId = packet.UserId,
+                            UserId = packet.UserId,
                             Team = pTeam
                         };
                         _playersConnections[_curPlayerId] = player;
 
-                        Console.WriteLine($"[PhaseManager] New player connected to the game. In matchId:{_curPlayerId} GlobalId:{player.PlayerId}, Nickname:{player.Nickname}.");
+                        Console.WriteLine($"[PhaseManager] New player connected to the game. In matchId:{_curPlayerId} GlobalId:{player.UserId}, Nickname:{player.Nickname}.");
                         Console.WriteLine($"[PhaseManager] Players:{_curPlayerId + 1} / {_playersConnections.Length}");
 
                         S2C_HandshakeResponse response = new S2C_HandshakeResponse
