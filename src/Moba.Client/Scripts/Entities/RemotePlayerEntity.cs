@@ -9,6 +9,9 @@ public partial class RemotePlayerEntity : BaseEntity
 	public ushort PlayerId {get; private set;}
 	[Export] private Label _nickname;
 
+	public enum States { Idle, Move, Chase, Attack, Cast, Stuned };
+	public States CurrentState = States.Idle;
+
 
 	public void InitRemote(string nickname, ushort playerId)
 	{

@@ -34,7 +34,7 @@ public partial class BaseEntity : CharacterBody3D
 		}
 	}
 
-	protected float _moveSpeed;
+	protected float _moveSpeed = 3.0f;
 	public float MoveSpeed
 	{
 		get => _moveSpeed;

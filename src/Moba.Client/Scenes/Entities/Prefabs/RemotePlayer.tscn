@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cpybjiaymbjr3"]
 
 [ext_resource type="Script" uid="uid://kxf2os7mekow" path="res://Scripts/Entities/RemotePlayerEntity.cs" id="1_tqqdi"]
-[ext_resource type="PackedScene" uid="uid://d4anrcqgy5kfc" path="res://Scenes/Units/Heroes/FirstHero/FirstHero.tscn" id="2_xogh8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_83fg3"]
 
@@ -54,5 +53,3 @@ layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_ohqdn")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tqqdi")
 show_percentage = false
-
-[node name="hero1" parent="." unique_id=557745261 instance=ExtResource("2_xogh8")]
