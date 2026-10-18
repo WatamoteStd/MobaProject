@@ -17,4 +17,13 @@ public class HeroEntity : LivingEntity
 
     }
 
+    public void SetMoveTarget(Vector3 pos)
+    {
+        
+        pos.Y = 0;
+        _moveTarget = pos;
+        CurrentState = States.Move;
+
+    }
+
 }

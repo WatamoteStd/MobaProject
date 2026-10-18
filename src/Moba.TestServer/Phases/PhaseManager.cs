@@ -335,7 +335,7 @@ public partial class PhaseManager
             
             case PacketTypes.C2S_MoveRequest:
                 {
-                    Console.WriteLine($"[Game Packet] PlayerMoveRequest");
+                    _matchHolder!.HandleCommand(cmd);
                 }
             break;
 

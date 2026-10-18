@@ -7,6 +7,11 @@ namespace Entities;
 public class LivingEntity : EntityBase
 {
 
+    public enum States { Idle, Move, Chase, Cast, Attack, Respawn}
+    public States CurrentState = States.Idle;
+
+
+    protected Vector3 _moveTarget = Vector3.Zero;
     protected float _moveSpeed;
     protected float _maxMoveSpeed;
     public float Speed
@@ -68,5 +73,51 @@ public class LivingEntity : EntityBase
         _attackRange = _dllData.AttackRange;
 
     }
+
+    public virtual void Update(float deltaTime)
+    {
+        
+        switch(CurrentState)
+        {
+            
+            case States.Idle:
+
+            break;
+
+            case States.Move:
+                {
+                    
+                    Move(deltaTime);
+
+                }
+            break;
+
+        }
+
+    }
+
+
+    protected virtual void Move(float deltaTime)
+    {
+        
+        var direction = _moveTarget - Position;
+        float  distanceSquared = direction.LengthSquared();
+
+        float frameStep = _moveSpeed * deltaTime;
+
+        if(distanceSquared <= frameStep * frameStep)
+        {
+            Position = _moveTarget;
+            CurrentState = States.Idle;
+            return;
+        }
+
+        var dirNormal = Vector3.Normalize(direction);
+        Position += dirNormal * frameStep;
+
+    }
+
+
+
 
 }
