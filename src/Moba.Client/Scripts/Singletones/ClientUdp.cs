@@ -153,6 +153,14 @@ public partial class ClientUdp : Node
 
 	}
 
+	public void GAME_SendMoveRequest(C2S_MoveRequestPacket packet)
+	{
+		Span<byte> buffer = stackalloc byte[32];
+		int writenBytes = PacketTranslator.Write(PacketTypes.C2S_MoveRequest, buffer, ref packet);
+
+		_socket.Send(buffer[..writenBytes]);
+	}
+
 
 
 	public bool TryGetGamePacket(out NetworkPacket packet)

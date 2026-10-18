@@ -131,4 +131,18 @@ public static class PacketTranslator
         pck.Deserialize(buffer);
     }
 
+    public static int Write(PacketTypes type, Span<byte> buffer, ref C2S_MoveRequestPacket pck)
+    {
+        
+        BinaryPrimitives.WriteUInt16LittleEndian(buffer, (ushort) type);
+        int payloadSize = pck.Serialize(buffer[2..]);
+
+        return 2 + payloadSize;
+
+    }
+    public static void Read(ReadOnlySpan<byte> buffer, ref C2S_MoveRequestPacket pck)
+    {
+        pck.Deserialize(buffer);
+    }
+
 }

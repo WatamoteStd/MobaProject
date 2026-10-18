@@ -74,6 +74,8 @@ public partial class EntityManager : Node
 
 				_idToEntity[locPlayer.ServerId] = locPlayer;
 
+				MatchSession.Instance.LocalPlayerEntityId = data.EntityIds[i];
+
 			}
 			else
 			{

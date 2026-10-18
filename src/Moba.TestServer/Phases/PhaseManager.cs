@@ -127,7 +127,7 @@ public partial class PhaseManager
             else if(CurrentPhase == Phases.InGame)
             {
                 
-                
+                _matchHolder!.Update(FixedDeltaTime);
 
             }
 
@@ -330,7 +330,16 @@ public partial class PhaseManager
     private void ProcessGame(NetworkCommand cmd)
     {
         
+        switch(cmd.Type)
+        {
+            
+            case PacketTypes.C2S_MoveRequest:
+                {
+                    Console.WriteLine($"[Game Packet] PlayerMoveRequest");
+                }
+            break;
 
+        }
 
     }
 

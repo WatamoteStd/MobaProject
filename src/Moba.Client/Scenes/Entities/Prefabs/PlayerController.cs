@@ -1,4 +1,5 @@
 using Godot;
+using Moba.Shared.UdpServer.Packets.Game;
 using Moba.Shared.UdpServer.Teams;
 using System;
 
@@ -47,6 +48,12 @@ public partial class PlayerController : Node
 			clickPoint.Y = 0f;
 			
 			OnClickMove?.Invoke(clickPoint);
+
+			C2S_MoveRequestPacket pck = new C2S_MoveRequestPacket
+			{
+				X = clickPoint.X, Z = clickPoint.Z
+			};
+			ClientUdp.Instance.GAME_SendMoveRequest(pck);
 		}
 
 		if(@event is InputEventMouseButton middleEvent && middleEvent.ButtonIndex == MouseButton.Middle)

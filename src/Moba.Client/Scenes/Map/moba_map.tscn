@@ -49,8 +49,5 @@ environment = SubResource("Environment_83fg3")
 
 [node name="Entities" type="Node3D" parent="." unique_id=821078790]
 
-[node name="CharacterBody3D" parent="Entities" unique_id=1180173575 instance=ExtResource("4_62glp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8802962, 0)
-
 [node name="MainCamera" type="Camera3D" parent="." unique_id=1298227616 groups=["MainCamera"]]
 transform = Transform3D(-4.371139e-08, -0.57357645, 0.81915206, 0, 0.81915206, 0.57357645, -1, 2.5071824e-08, -3.5806274e-08, 12.357648, 13.268942, 0.76991487)
