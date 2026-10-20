@@ -2,11 +2,13 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Channels;
+using Moba.Shared.UdpServer.Rei;
+using Moba.Shared.UdpServer.Rei.Interfaces;
 using NetworkLayer.DataStructs;
 
 namespace NetworkLayer;
 
-public class NetworkManager
+public class NetworkManager : ISocketOwner
 {
     
     private readonly Socket _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -16,6 +18,8 @@ public class NetworkManager
     // KIDS
 
     PacketCatcher? _packetCatcher;
+    private ReiWeb _reiWeb;
+    public ISocketOwner SocketOwner => this;
     
     public NetworkManager(int port, ChannelWriter<NetworkCommand> channel)
     {
@@ -32,6 +36,7 @@ public class NetworkManager
         _socket.Bind(end);
 
         _channel = channel;
+        _reiWeb = new(SocketOwner);
 
     }
 
@@ -46,6 +51,13 @@ public class NetworkManager
     public Socket GetSocket()
     {
         return _socket;
+    }
+
+    public void SendTo(ReadOnlySpan<byte> buffer, int length, EndPoint endPoint)
+    {
+        
+        _socket.SendTo(buffer[..length], SocketFlags.None, endPoint);
+
     }
 
 }

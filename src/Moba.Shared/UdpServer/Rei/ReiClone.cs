@@ -104,10 +104,10 @@ public class ReiClone
 
     }
 
-    public void ReceivedBytes(ReadOnlySpan<byte> rawData, EndPoint sender)
+    public bool ReceivedBytes(ReadOnlySpan<byte> rawData, EndPoint sender)
     {
         
-        
+
 
     }
     
