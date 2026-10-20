@@ -1,4 +1,3 @@
-
 using System.Buffers.Binary;
 using System.Runtime.CompilerServices;
 using Moba.Shared.UdpServer.Packets.Game;
